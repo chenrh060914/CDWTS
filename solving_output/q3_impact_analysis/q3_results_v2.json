@@ -1,0 +1,531 @@
+{
+  "xgboost_analysis": {
+    "best_params": {
+      "max_depth": 5,
+      "min_samples_split": 5,
+      "n_estimators": 50
+    },
+    "metrics": {
+      "rmse": 0.4971293051615391,
+      "r2": 0.9824649779988031,
+      "mae": 0.37227150231388895,
+      "cv_rmse": 1.7515218736103169
+    },
+    "feature_importance": [
+      {
+        "feature": "last_week",
+        "importance": 0.8031618465466553
+      },
+      {
+        "feature": "season",
+        "importance": 0.04742180525416754
+      },
+      {
+        "feature": "season_scaled",
+        "importance": 0.04662197197839188
+      },
+      {
+        "feature": "season.1",
+        "importance": 0.027396472755860712
+      },
+      {
+        "feature": "season_group",
+        "importance": 0.0251850420147274
+      },
+      {
+        "feature": "partner_id",
+        "importance": 0.015481657797923917
+      },
+      {
+        "feature": "age_scaled",
+        "importance": 0.010524243385343543
+      },
+      {
+        "feature": "age",
+        "importance": 0.008125965017832878
+      },
+      {
+        "feature": "industry_Athlete",
+        "importance": 0.00790283020076597
+      },
+      {
+        "feature": "voting_phase",
+        "importance": 0.002556925220753346
+      },
+      {
+        "feature": "industry_Radio Personality",
+        "importance": 0.0018085974929394394
+      },
+      {
+        "feature": "industry_Tv Personality",
+        "importance": 0.0007815458333735336
+      },
+      {
+        "feature": "industry_Actor/Actress",
+        "importance": 0.0006608893762671859
+      },
+      {
+        "feature": "industry_Singer/Rapper",
+        "importance": 0.0006427606612976653
+      },
+      {
+        "feature": "industry_Politician",
+        "importance": 0.0003935751095060643
+      },
+      {
+        "feature": "industry_Comedian",
+        "importance": 0.00033726292759834927
+      },
+      {
+        "feature": "industry_Model",
+        "importance": 0.00031829987676024326
+      },
+      {
+        "feature": "industry_Conservationist",
+        "importance": 0.0002917370298198786
+      },
+      {
+        "feature": "industry_Social Media Personality",
+        "importance": 0.00019123524719216655
+      },
+      {
+        "feature": "industry_Racing Driver",
+        "importance": 0.00011434862915597069
+      },
+      {
+        "feature": "industry_Magician",
+        "importance": 3.9269712986536476e-05
+      },
+      {
+        "feature": "industry_Entrepreneur",
+        "importance": 2.637817941825235e-05
+      },
+      {
+        "feature": "industry_Sports Broadcaster",
+        "importance": 1.5339751262238207e-05
+      },
+      {
+        "feature": "industry_Astronaut",
+        "importance": 0.0
+      },
+      {
+        "feature": "industry_Beauty Pagent",
+        "importance": 0.0
+      },
+      {
+        "feature": "industry_Con Artist",
+        "importance": 0.0
+      },
+      {
+        "feature": "industry_Fitness Instructor",
+        "importance": 0.0
+      },
+      {
+        "feature": "industry_Fashion Designer",
+        "importance": 0.0
+      },
+      {
+        "feature": "industry_News Anchor",
+        "importance": 0.0
+      },
+      {
+        "feature": "industry_Military",
+        "importance": 0.0
+      },
+      {
+        "feature": "industry_Journalist",
+        "importance": 0.0
+      },
+      {
+        "feature": "industry_Musician",
+        "importance": 0.0
+      },
+      {
+        "feature": "industry_Motivational Speaker",
+        "importance": 0.0
+      },
+      {
+        "feature": "industry_Producer",
+        "importance": 0.0
+      }
+    ],
+    "n_samples": 421,
+    "n_features": 34
+  },
+  "dual_model_comparison": {
+    "model_judge_r2": 0.9804320044860485,
+    "model_fan_r2": 0.9685693623672463,
+    "feature_comparison": [
+      {
+        "feature": "last_week",
+        "importance_judge": 0.51216825512876,
+        "importance_fan": 0.6362071692222917,
+        "diff": 0.12403891409353174,
+        "ratio": 1.2421839165688426
+      },
+      {
+        "feature": "season.1",
+        "importance_judge": 0.09102491020630706,
+        "importance_fan": 0.032004012042652054,
+        "diff": -0.059020898163655,
+        "ratio": 0.35159619421711774
+      },
+      {
+        "feature": "season",
+        "importance_judge": 0.06957472737464486,
+        "importance_fan": 0.026968940456702704,
+        "diff": -0.04260578691794216,
+        "ratio": 0.3876255277684128
+      },
+      {
+        "feature": "season_scaled",
+        "importance_judge": 0.08249758883147129,
+        "importance_fan": 0.04088592016639173,
+        "diff": -0.04161166866507956,
+        "ratio": 0.4956013950947665
+      },
+      {
+        "feature": "partner_id",
+        "importance_judge": 0.03580707474093463,
+        "importance_fan": 0.05918570566843664,
+        "diff": 0.02337863092750201,
+        "ratio": 1.652905352681185
+      },
+      {
+        "feature": "season_group",
+        "importance_judge": 0.05812074876630107,
+        "importance_fan": 0.040650845928157646,
+        "diff": -0.017469902838143425,
+        "ratio": 0.6994205463812833
+      },
+      {
+        "feature": "age_scaled",
+        "importance_judge": 0.054269078233116885,
+        "importance_fan": 0.04060701487934329,
+        "diff": -0.013662063353773596,
+        "ratio": 0.7482532618314889
+      },
+      {
+        "feature": "industry_Radio Personality",
+        "importance_judge": 0.004144092171243879,
+        "importance_fan": 0.016251935633614274,
+        "diff": 0.012107843462370396,
+        "ratio": 3.9217118176608894
+      },
+      {
+        "feature": "age",
+        "importance_judge": 0.040018456140778765,
+        "importance_fan": 0.05012887617327576,
+        "diff": 0.010110420032496993,
+        "ratio": 1.2526439268837783
+      },
+      {
+        "feature": "industry_Athlete",
+        "importance_judge": 0.008767509429175237,
+        "importance_fan": 0.01719265282511804,
+        "diff": 0.008425143395942802,
+        "ratio": 1.9609505718707054
+      },
+      {
+        "feature": "industry_Tv Personality",
+        "importance_judge": 0.008773158569073593,
+        "importance_fan": 0.0038533187084443484,
+        "diff": -0.0049198398606292455,
+        "ratio": 0.4392168036385511
+      },
+      {
+        "feature": "industry_Singer/Rapper",
+        "importance_judge": 0.0034612502178820543,
+        "importance_fan": 0.007893995790727762,
+        "diff": 0.004432745572845708,
+        "ratio": 2.280677519896369
+      },
+      {
+        "feature": "industry_Conservationist",
+        "importance_judge": 2.1923453007982245e-05,
+        "importance_fan": 0.004413621196064407,
+        "diff": 0.004391697743056425,
+        "ratio": 201.3187002333715
+      },
+      {
+        "feature": "industry_Comedian",
+        "importance_judge": 0.0032627887447544274,
+        "importance_fan": 9.111256746909758e-05,
+        "diff": -0.0031716761772853297,
+        "ratio": 0.02792475143329575
+      },
+      {
+        "feature": "industry_Politician",
+        "importance_judge": 0.0023649991190068838,
+        "importance_fan": 0.0,
+        "diff": -0.0023649991190068838,
+        "ratio": 0.0
+      },
+      {
+        "feature": "industry_News Anchor",
+        "importance_judge": 0.002469872887065222,
+        "importance_fan": 0.0003545968226075845,
+        "diff": -0.0021152760644576377,
+        "ratio": 0.14356884927468566
+      },
+      {
+        "feature": "industry_Social Media Personality",
+        "importance_judge": 0.0010210880413379392,
+        "importance_fan": 0.002898638599994275,
+        "diff": 0.0018775505586563358,
+        "ratio": 2.838774129916118
+      },
+      {
+        "feature": "industry_Entrepreneur",
+        "importance_judge": 0.0018452730111517869,
+        "importance_fan": 0.0,
+        "diff": -0.0018452730111517869,
+        "ratio": 0.0
+      },
+      {
+        "feature": "voting_phase",
+        "importance_judge": 0.004473031138729796,
+        "importance_fan": 0.00625486485515166,
+        "diff": 0.0017818337164218646,
+        "ratio": 1.398350362723568
+      },
+      {
+        "feature": "industry_Actor/Actress",
+        "importance_judge": 0.008454031406833302,
+        "importance_fan": 0.007554932784307085,
+        "diff": -0.0008990986225262173,
+        "ratio": 0.8936485247541974
+      },
+      {
+        "feature": "industry_Racing Driver",
+        "importance_judge": 0.0017434123754359772,
+        "importance_fan": 0.0012026413776558438,
+        "diff": -0.0005407709977801334,
+        "ratio": 0.6898203348895378
+      },
+      {
+        "feature": "industry_Sports Broadcaster",
+        "importance_judge": 0.00015160405444381283,
+        "importance_fan": 0.0006310529584506129,
+        "diff": 0.00047944890400680013,
+        "ratio": 4.162504390237487
+      },
+      {
+        "feature": "industry_Military",
+        "importance_judge": 0.0005660166015194884,
+        "importance_fan": 0.0001954416760398923,
+        "diff": -0.0003705749254795961,
+        "ratio": 0.34529312565375436
+      },
+      {
+        "feature": "industry_Motivational Speaker",
+        "importance_judge": 8.323961743765085e-05,
+        "importance_fan": 0.000325631943134462,
+        "diff": 0.00024239232569681117,
+        "ratio": 3.9119779975030617
+      },
+      {
+        "feature": "industry_Fitness Instructor",
+        "importance_judge": 0.00030721243302534113,
+        "importance_fan": 0.00010304178529132302,
+        "diff": -0.0002041706477340181,
+        "ratio": 0.3354087942851713
+      },
+      {
+        "feature": "industry_Fashion Designer",
+        "importance_judge": 0.0001902867520664738,
+        "importance_fan": 0.0,
+        "diff": -0.0001902867520664738,
+        "ratio": 0.0
+      },
+      {
+        "feature": "industry_Model",
+        "importance_judge": 0.0042874997057563485,
+        "importance_fan": 0.004105849827407998,
+        "diff": -0.00018164987834835052,
+        "ratio": 0.9576326561917347
+      },
+      {
+        "feature": "industry_Beauty Pagent",
+        "importance_judge": 0.00011876305456944408,
+        "importance_fan": 0.0,
+        "diff": -0.00011876305456944408,
+        "ratio": 0.0
+      },
+      {
+        "feature": "industry_Producer",
+        "importance_judge": 1.1604717001400017e-05,
+        "importance_fan": 3.635321850472621e-05,
+        "diff": 2.4748501503326193e-05,
+        "ratio": 3.1325973085435574
+      },
+      {
+        "feature": "industry_Journalist",
+        "importance_judge": 0.0,
+        "importance_fan": 1.8328927650698404e-06,
+        "diff": 1.8328927650698404e-06,
+        "ratio": 18328.927650698402
+      },
+      {
+        "feature": "industry_Astronaut",
+        "importance_judge": 5.030771674422166e-07,
+        "importance_fan": 0.0,
+        "diff": -5.030771674422166e-07,
+        "ratio": 0.0
+      },
+      {
+        "feature": "industry_Con Artist",
+        "importance_judge": 0.0,
+        "importance_fan": 0.0,
+        "diff": 0.0,
+        "ratio": 0.0
+      },
+      {
+        "feature": "industry_Magician",
+        "importance_judge": 0.0,
+        "importance_fan": 0.0,
+        "diff": 0.0,
+        "ratio": 0.0
+      },
+      {
+        "feature": "industry_Musician",
+        "importance_judge": 0.0,
+        "importance_fan": 0.0,
+        "diff": 0.0,
+        "ratio": 0.0
+      }
+    ]
+  },
+  "partner_effect": {
+    "n_partners": 36,
+    "top_partners": [
+      {
+        "partner_id": 19,
+        "mean_placement": 2.9411764705882355,
+        "std_placement": 1.8190171877724972,
+        "n_seasons": 17,
+        "mean_score": 28.705214346829642,
+        "std_score": 3.5718918249901
+      },
+      {
+        "partner_id": 16,
+        "mean_placement": 4.2,
+        "std_placement": 3.420526275297414,
+        "n_seasons": 5,
+        "mean_score": 23.560828666666666,
+        "std_score": 3.4318960241935597
+      },
+      {
+        "partner_id": 48,
+        "mean_placement": 4.6,
+        "std_placement": 4.03732584763727,
+        "n_seasons": 5,
+        "mean_score": 27.62935064935065,
+        "std_score": 3.508288934283482
+      },
+      {
+        "partner_id": 18,
+        "mean_placement": 5.190476190476191,
+        "std_placement": 3.5442777489785926,
+        "n_seasons": 21,
+        "mean_score": 27.111888692365834,
+        "std_score": 5.030844647161896
+      },
+      {
+        "partner_id": 28,
+        "mean_placement": 5.2631578947368425,
+        "std_placement": 3.5721469620003954,
+        "n_seasons": 19,
+        "mean_score": 28.683654714057873,
+        "std_score": 5.720704994408563
+      },
+      {
+        "partner_id": 31,
+        "mean_placement": 5.4,
+        "std_placement": 3.4058772731852804,
+        "n_seasons": 10,
+        "mean_score": 25.60948076334777,
+        "std_score": 4.363357996528423
+      },
+      {
+        "partner_id": 38,
+        "mean_placement": 5.5,
+        "std_placement": 3.391164991562634,
+        "n_seasons": 14,
+        "mean_score": 28.086449877344876,
+        "std_score": 4.4091720154761385
+      },
+      {
+        "partner_id": 10,
+        "mean_placement": 5.8,
+        "std_placement": 3.4761089357690347,
+        "n_seasons": 25,
+        "mean_score": 24.297375517171716,
+        "std_score": 4.054180276605758
+      },
+      {
+        "partner_id": 7,
+        "mean_placement": 6.0,
+        "std_placement": 3.4278273002005215,
+        "n_seasons": 17,
+        "mean_score": 25.10820475490196,
+        "std_score": 4.089650062888174
+      },
+      {
+        "partner_id": 35,
+        "mean_placement": 6.083333333333333,
+        "std_placement": 2.7455197664338145,
+        "n_seasons": 12,
+        "mean_score": 27.996142953342954,
+        "std_score": 3.6794861238139247
+      }
+    ],
+    "partner_variance": 2.8026532807610627
+  },
+  "age_effect": {
+    "age_placement_corr": 0.43286577104425855,
+    "age_placement_pvalue": 1.1805856658132023e-20,
+    "age_score_corr": -0.4239866156958034,
+    "age_score_pvalue": 8.486867914157009e-20,
+    "age_group_stats": [
+      {
+        "age": "<25",
+        "placement": 4.7611940298507465,
+        "avg_score": 27.938409602366956
+      },
+      {
+        "age": "25-35",
+        "placement": 5.62962962962963,
+        "avg_score": 25.110892803190637
+      },
+      {
+        "age": "35-45",
+        "placement": 7.07,
+        "avg_score": 23.425829470346322
+      },
+      {
+        "age": "45-55",
+        "placement": 8.764705882352942,
+        "avg_score": 22.825431635366268
+      },
+      {
+        "age": "55+",
+        "placement": 9.549019607843137,
+        "avg_score": 19.960488426491807
+      }
+    ],
+    "interpretation": "粉丝对年龄更敏感"
+  },
+  "conclusions": {
+    "top_factors": [
+      "last_week",
+      "season",
+      "season_scaled",
+      "season.1",
+      "season_group"
+    ],
+    "model_r2": 0.9824649779988031,
+    "age_placement_corr": 0.43286577104425855,
+    "age_score_corr": -0.4239866156958034
+  }
+}

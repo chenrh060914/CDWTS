@@ -43,20 +43,20 @@ warnings.filterwarnings('ignore')
 class Config:
     """全局配置"""
     # 数据路径
-    DATA_DIR = "preprocessing_output"
+    DATA_DIR = "C:/Users/ultraman/Desktop/文件夹/shumo/code/preprocessing_output"
     MODELS_DIR = os.path.join(DATA_DIR, "models")
     DATA_SUBDIR = os.path.join(DATA_DIR, "data")
-    OUTPUT_DIR = "solving_output_v2"
+    OUTPUT_DIR = "C:/Users/ultraman/Desktop/文件夹/shumo/code/solving_output_v4"
     
     # 随机种子
     RANDOM_SEED = 42
     
     # 问题一参数
     Q1_LAMBDA_REG = 0.1  # 正则化系数（熵正则化权重）
-    Q1_MAX_ITER = 100    # SLSQP最大迭代次数（进一步减少）
-    Q1_MCMC_SAMPLES = 500   # MCMC采样数
-    Q1_BURNIN = 100      # MCMC预热期
-    Q1_BOOTSTRAP_N = 30   # Bootstrap次数
+    Q1_MAX_ITER = 500    # SLSQP最大迭代次数（进一步减少）
+    Q1_MCMC_SAMPLES = 5000   # MCMC采样数
+    Q1_BURNIN = 1000      # MCMC预热期
+    Q1_BOOTSTRAP_N = 500   # Bootstrap次数
     Q1_BOOTSTRAP_WEEKS = 10  # Bootstrap评估的周数（恢复到10）
     
     # 问题二参数
