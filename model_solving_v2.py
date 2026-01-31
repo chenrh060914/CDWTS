@@ -53,11 +53,11 @@ class Config:
     
     # 问题一参数
     Q1_LAMBDA_REG = 0.1  # 正则化系数（熵正则化权重）
-    Q1_MAX_ITER = 500    # SLSQP最大迭代次数（减少以加速）
-    Q1_MCMC_SAMPLES = 500   # MCMC采样数（减少以加速）
+    Q1_MAX_ITER = 100    # SLSQP最大迭代次数（进一步减少）
+    Q1_MCMC_SAMPLES = 500   # MCMC采样数
     Q1_BURNIN = 100      # MCMC预热期
-    Q1_BOOTSTRAP_N = 20   # Bootstrap次数（大幅减少以避免卡住）
-    Q1_BOOTSTRAP_WEEKS = 3  # Bootstrap评估的周数（减少）
+    Q1_BOOTSTRAP_N = 30   # Bootstrap次数
+    Q1_BOOTSTRAP_WEEKS = 10  # Bootstrap评估的周数（恢复到10）
     
     # 问题二参数
     Q2_BOOTSTRAP_N = 1000
@@ -180,14 +180,26 @@ class Q1FanVoteEstimator:
         return True
     
     def _solve_single_optimization(self, week_data: Dict) -> Dict:
-        """求解单周优化问题"""
+        """
+        求解单周优化问题
+        
+        修复：添加快速失败检测和智能初始值，避免Bootstrap卡住
+        """
         n = week_data['n_contestants']
         judge_pct = np.array(week_data['judge_pct'])
         judge_ranks = np.array(week_data['judge_ranks'])
         eliminated_idx = week_data['eliminated_idx']
         voting_rule = week_data['voting_rule']
         
-        v0 = np.ones(n) / n
+        # 智能初始值：如果有淘汰者，初始化粉丝投票使其排名靠后
+        if eliminated_idx is not None and n > 2:
+            v0 = np.ones(n) / n
+            # 降低被淘汰者的初始投票，使其更容易被淘汰
+            v0[eliminated_idx] = 0.02
+            # 重新归一化
+            v0 = v0 / np.sum(v0)
+        else:
+            v0 = np.ones(n) / n
         
         def objective(v):
             uniform = np.ones(n) / n
@@ -214,25 +226,61 @@ class Q1FanVoteEstimator:
         if eliminated_idx is not None:
             constraints.append({'type': 'ineq', 'fun': constraint_eliminated})
         
-        bounds = [(0.01, 0.60)] * n
+        # 放宽边界约束，使优化更容易收敛
+        bounds = [(0.005, 0.80)] * n
         
         try:
+            # 使用较少的迭代次数，快速失败
             result = minimize(
                 objective, v0,
                 method='SLSQP',
                 bounds=bounds,
                 constraints=constraints,
-                options={'maxiter': Config.Q1_MAX_ITER, 'ftol': 1e-8}
+                options={'maxiter': 100, 'ftol': 1e-6}  # 减少迭代，放宽精度
             )
             if result.success:
                 fan_votes = result.x / np.sum(result.x)
             else:
-                fan_votes = v0
+                # 优化失败时，使用启发式解
+                fan_votes = self._heuristic_fan_votes(week_data)
         except Exception:
-            fan_votes = v0
+            fan_votes = self._heuristic_fan_votes(week_data)
         
         fan_ranks = np.argsort(np.argsort(-fan_votes)) + 1
         return {'fan_votes': fan_votes.tolist(), 'fan_ranks': fan_ranks.tolist()}
+    
+    def _heuristic_fan_votes(self, week_data: Dict) -> np.ndarray:
+        """
+        启发式生成粉丝投票（当优化失败时使用）
+        
+        策略：基于评委排名的逆序，被淘汰者获得最少票
+        """
+        n = week_data['n_contestants']
+        judge_ranks = np.array(week_data['judge_ranks'])
+        eliminated_idx = week_data['eliminated_idx']
+        
+        if eliminated_idx is None:
+            # 无淘汰时，使用均匀分布
+            return np.ones(n) / n
+        
+        # 基于评委排名生成粉丝投票
+        # 评委排名越高（数字越小），粉丝投票越多（反映技术水平）
+        # 但被淘汰者获得最少票
+        fan_votes = np.ones(n)
+        
+        # 根据评委排名分配基础票数
+        max_rank = np.max(judge_ranks)
+        for i in range(n):
+            if i == eliminated_idx:
+                fan_votes[i] = 0.02  # 被淘汰者最少票
+            else:
+                # 排名越好，票数越多
+                fan_votes[i] = (max_rank - judge_ranks[i] + 1) / max_rank
+        
+        # 归一化
+        fan_votes = fan_votes / np.sum(fan_votes)
+        
+        return fan_votes
     
     def solve_constraint_optimization(self, week_key: str) -> Dict:
         """约束优化求解单周粉丝投票"""
