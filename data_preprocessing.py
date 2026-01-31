@@ -355,12 +355,19 @@ class DWTSDataPreprocessor:
                             eliminated_idx = i
                             eliminated_name = row['celebrity_name']
                 
+                # 获取每位选手的最终排名(placement)
+                placements = []
+                for i, (idx, row) in enumerate(active_df.iterrows()):
+                    placement = row.get('placement', 0)
+                    placements.append(int(placement) if placement > 0 else None)
+                
                 # 存储数据
                 week_data[(season, week)] = {
                     'contestants': contestants,
                     'judge_scores': [float(x) for x in judge_scores],
                     'judge_pct': [float(x) for x in judge_pct],
                     'judge_ranks': [int(x) for x in judge_ranks],
+                    'placements': placements,  # 新增：最终名次
                     'eliminated_idx': int(eliminated_idx) if eliminated_idx is not None else None,
                     'eliminated_name': eliminated_name,
                     'voting_rule': voting_rule,

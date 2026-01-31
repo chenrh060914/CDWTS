@@ -183,9 +183,9 @@ class Q1FanVoteEstimator:
         """
         求解单周优化问题
         
-        修复v2.1：改进目标函数，产生更有区分度的粉丝投票估计
-        - 原问题：目标函数min(v-uniform)²导致解趋向均匀分布
-        - 新方案：使用基于评委分数的先验，鼓励与评委评分有差异的解
+        v2.2更新：加入排名顺序约束
+        - 不仅考虑被淘汰者，还考虑所有选手的最终排名
+        - 粉丝投票应该使综合得分的排序与最终名次一致
         """
         n = week_data['n_contestants']
         judge_pct = np.array(week_data['judge_pct'])
@@ -193,81 +193,130 @@ class Q1FanVoteEstimator:
         judge_scores = np.array(week_data.get('judge_scores', judge_pct * 30))
         eliminated_idx = week_data['eliminated_idx']
         voting_rule = week_data['voting_rule']
+        placements = week_data.get('placements', None)  # 最终名次
         
-        # 智能初始值：基于评委排名的逆序（假设粉丝投票与评委有差异）
-        if eliminated_idx is not None and n > 2:
-            # 被淘汰者获得低票，其他人根据评委排名分配
-            v0 = np.ones(n)
-            max_rank = np.max(judge_ranks)
+        # 智能初始值：基于最终名次（如果有的话）
+        v0 = np.ones(n) / n
+        if placements is not None and all(p is not None and p > 0 for p in placements):
+            # 根据最终名次设置初始值：名次越好(数字越小)，粉丝投票越高
+            max_placement = max(placements)
             for i in range(n):
-                if i == eliminated_idx:
-                    v0[i] = 0.02
-                else:
-                    # 评委排名越低（数字越大），假设粉丝投票越高（体现"黑马"效应）
-                    v0[i] = (judge_ranks[i] / max_rank) * 0.8 + 0.2
+                v0[i] = (max_placement - placements[i] + 1) / max_placement
             v0 = v0 / np.sum(v0)
-        else:
-            # 无淘汰时，使用基于评委分数逆序的先验
-            v0 = np.ones(n)
-            max_score = np.max(judge_scores) if np.max(judge_scores) > 0 else 1
-            for i in range(n):
-                # 假设粉丝投票与技术水平有一定负相关（"同情票"效应）
-                v0[i] = (1 - judge_scores[i] / max_score / 2) + 0.5
+        elif eliminated_idx is not None and n > 2:
+            # 被淘汰者获得低票
+            v0[eliminated_idx] = 0.02
             v0 = v0 / np.sum(v0)
         
         def objective(v):
             """
-            新目标函数：
-            1. 最大化熵（鼓励分散分布，而非均匀）
-            2. 与评委分数有适度差异（体现粉丝投票的独立性）
-            3. 被淘汰者应获得较少票
+            目标函数：
+            1. 最大化熵（鼓励分散分布）
+            2. 如果有最终名次，鼓励综合排名与最终名次一致
             """
-            # 熵正则化（最大化熵，鼓励分散但不必均匀）
+            # 熵正则化
             entropy = -np.sum(v * np.log(v + 1e-10))
             
-            # 与评委分数的差异性（鼓励粉丝投票有自己的模式）
-            judge_normalized = judge_pct / np.sum(judge_pct) if np.sum(judge_pct) > 0 else np.ones(n) / n
-            difference = np.sum((v - judge_normalized)**2)
+            # 排名一致性惩罚
+            ranking_penalty = 0
+            if placements is not None and all(p is not None and p > 0 for p in placements):
+                # 计算综合得分
+                if voting_rule == 'rank':
+                    v_ranks = np.argsort(np.argsort(-v)) + 1
+                    combined = judge_ranks + v_ranks  # 排名制：排名相加
+                else:
+                    combined = judge_pct + v  # 百分比制：百分比相加
+                
+                # 综合得分排名应该与placement一致
+                # combined越小越好(排名制)或越大越好(百分比制)
+                if voting_rule == 'rank':
+                    combined_ranks = np.argsort(np.argsort(combined)) + 1  # 升序
+                else:
+                    combined_ranks = np.argsort(np.argsort(-combined)) + 1  # 降序
+                
+                # 计算排名偏差
+                placements_arr = np.array(placements)
+                ranking_penalty = np.sum((combined_ranks - placements_arr)**2) * 0.1
             
-            # 如果有淘汰者，惩罚给淘汰者高票
+            # 被淘汰者惩罚
             eliminated_penalty = 0
             if eliminated_idx is not None:
-                eliminated_penalty = v[eliminated_idx] * 5  # 惩罚给淘汰者高票
+                eliminated_penalty = v[eliminated_idx] * 3
             
-            # 总目标：最大化熵 + 适度差异 - 淘汰者惩罚
-            # 注意：minimize所以取负
-            return -entropy + 0.1 * difference + eliminated_penalty
+            return -entropy + ranking_penalty + eliminated_penalty
         
         def constraint_sum(v):
             return np.sum(v) - 1.0
         
         def constraint_eliminated(v):
+            """被淘汰者综合得分应该最差"""
             if eliminated_idx is None:
                 return 0.0
             if voting_rule == 'rank':
                 v_ranks = np.argsort(np.argsort(-v)) + 1
                 combined = judge_ranks + v_ranks
+                # 排名制：被淘汰者combined应该最大
+                eliminated_score = combined[eliminated_idx]
+                other_scores = np.delete(combined, eliminated_idx)
+                return eliminated_score - np.max(other_scores) - 0.001
             else:
                 combined = judge_pct + v
-            eliminated_score = combined[eliminated_idx]
-            other_scores = np.delete(combined, eliminated_idx)
-            return np.min(other_scores) - eliminated_score - 0.001
+                # 百分比制：被淘汰者combined应该最小
+                eliminated_score = combined[eliminated_idx]
+                other_scores = np.delete(combined, eliminated_idx)
+                return np.min(other_scores) - eliminated_score - 0.001
+        
+        def constraint_rankings(v):
+            """排名顺序约束：综合得分排序应与最终名次一致"""
+            if placements is None or not all(p is not None and p > 0 for p in placements):
+                return 0.0
+            
+            if voting_rule == 'rank':
+                v_ranks = np.argsort(np.argsort(-v)) + 1
+                combined = judge_ranks + v_ranks
+                # 检查排名顺序是否正确
+                # 对于任意两个选手i,j，如果placement[i] < placement[j]，
+                # 则combined[i] < combined[j]（排名制：得分越小越好）
+                violations = 0
+                for i in range(n):
+                    for j in range(i+1, n):
+                        if placements[i] < placements[j]:
+                            if combined[i] >= combined[j]:
+                                violations += 1
+                        elif placements[i] > placements[j]:
+                            if combined[i] <= combined[j]:
+                                violations += 1
+                return -violations  # 返回负数表示违反约束
+            else:
+                combined = judge_pct + v
+                violations = 0
+                for i in range(n):
+                    for j in range(i+1, n):
+                        if placements[i] < placements[j]:
+                            if combined[i] <= combined[j]:
+                                violations += 1
+                        elif placements[i] > placements[j]:
+                            if combined[i] >= combined[j]:
+                                violations += 1
+                return -violations
         
         constraints = [{'type': 'eq', 'fun': constraint_sum}]
         if eliminated_idx is not None:
             constraints.append({'type': 'ineq', 'fun': constraint_eliminated})
+        # 添加排名约束（作为不等式约束）
+        if placements is not None and all(p is not None and p > 0 for p in placements):
+            constraints.append({'type': 'ineq', 'fun': constraint_rankings})
         
-        # 放宽边界约束，使优化更容易收敛
+        # 边界约束
         bounds = [(0.005, 0.80)] * n
         
         try:
-            # 使用较少的迭代次数，快速失败
             result = minimize(
                 objective, v0,
                 method='SLSQP',
                 bounds=bounds,
                 constraints=constraints,
-                options={'maxiter': 100, 'ftol': 1e-6}  # 减少迭代，放宽精度
+                options={'maxiter': 200, 'ftol': 1e-6}
             )
             if result.success:
                 fan_votes = result.x / np.sum(result.x)
@@ -284,29 +333,32 @@ class Q1FanVoteEstimator:
         """
         启发式生成粉丝投票（当优化失败时使用）
         
-        策略：基于评委排名的逆序，被淘汰者获得最少票
+        v2.2更新：优先使用最终名次，其次使用评委排名
         """
         n = week_data['n_contestants']
         judge_ranks = np.array(week_data['judge_ranks'])
         eliminated_idx = week_data['eliminated_idx']
+        placements = week_data.get('placements', None)
         
-        if eliminated_idx is None:
-            # 无淘汰时，使用均匀分布
-            return np.ones(n) / n
-        
-        # 基于评委排名生成粉丝投票
-        # 评委排名越高（数字越小），粉丝投票越多（反映技术水平）
-        # 但被淘汰者获得最少票
         fan_votes = np.ones(n)
         
-        # 根据评委排名分配基础票数
-        max_rank = np.max(judge_ranks)
-        for i in range(n):
-            if i == eliminated_idx:
-                fan_votes[i] = 0.02  # 被淘汰者最少票
-            else:
-                # 排名越好，票数越多
-                fan_votes[i] = (max_rank - judge_ranks[i] + 1) / max_rank
+        # 优先使用最终名次
+        if placements is not None and all(p is not None and p > 0 for p in placements):
+            max_placement = max(placements)
+            for i in range(n):
+                # 名次越好(数字越小)，粉丝投票越高
+                fan_votes[i] = (max_placement - placements[i] + 1) / max_placement
+        elif eliminated_idx is not None:
+            # 基于评委排名生成，被淘汰者获得最少票
+            max_rank = np.max(judge_ranks)
+            for i in range(n):
+                if i == eliminated_idx:
+                    fan_votes[i] = 0.02
+                else:
+                    fan_votes[i] = (max_rank - judge_ranks[i] + 1) / max_rank
+        else:
+            # 无淘汰且无名次信息，使用均匀分布
+            return np.ones(n) / n
         
         # 归一化
         fan_votes = fan_votes / np.sum(fan_votes)

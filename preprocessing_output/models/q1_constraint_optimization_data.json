@@ -32,6 +32,14 @@
       1,
       4
     ],
+    "placements": [
+      2,
+      1,
+      5,
+      4,
+      3,
+      6
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "rank",
@@ -74,6 +82,14 @@
       3,
       4
     ],
+    "placements": [
+      2,
+      1,
+      5,
+      4,
+      3,
+      6
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Trista Sutter",
     "voting_rule": "rank",
@@ -112,6 +128,13 @@
       1,
       3
     ],
+    "placements": [
+      2,
+      1,
+      5,
+      4,
+      3
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Evander Holyfield",
     "voting_rule": "rank",
@@ -146,6 +169,12 @@
       2,
       4
     ],
+    "placements": [
+      2,
+      1,
+      4,
+      3
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Rachel Hunter",
     "voting_rule": "rank",
@@ -176,6 +205,11 @@
       2,
       3
     ],
+    "placements": [
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Joey McIntyre",
     "voting_rule": "rank",
@@ -199,6 +233,10 @@
       0.5045871559633027
     ],
     "judge_ranks": [
+      2,
+      1
+    ],
+    "placements": [
       2,
       1
     ],
@@ -260,6 +298,18 @@
       1,
       9
     ],
+    "placements": [
+      9,
+      6,
+      5,
+      4,
+      3,
+      2,
+      8,
+      7,
+      1,
+      10
+    ],
     "eliminated_idx": 9,
     "eliminated_name": "Kenny Mayne",
     "voting_rule": "rank",
@@ -314,6 +364,17 @@
       9,
       2
     ],
+    "placements": [
+      9,
+      6,
+      5,
+      4,
+      3,
+      2,
+      8,
+      7,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Tatum O'Neal",
     "voting_rule": "rank",
@@ -364,6 +425,16 @@
       8,
       1
     ],
+    "placements": [
+      6,
+      5,
+      4,
+      3,
+      2,
+      8,
+      7,
+      1
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Giselle Fernandez",
     "voting_rule": "rank",
@@ -410,6 +481,15 @@
       7,
       1
     ],
+    "placements": [
+      6,
+      5,
+      4,
+      3,
+      2,
+      7,
+      1
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Master P",
     "voting_rule": "rank",
@@ -452,6 +532,14 @@
       5,
       2
     ],
+    "placements": [
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Tia Carrere",
     "voting_rule": "rank",
@@ -490,6 +578,13 @@
       4,
       1
     ],
+    "placements": [
+      5,
+      4,
+      3,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "George Hamilton",
     "voting_rule": "rank",
@@ -524,6 +619,12 @@
       4,
       1
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Lisa Rinna",
     "voting_rule": "rank",
@@ -552,6 +653,11 @@
     "judge_ranks": [
       2,
       3,
+      1
+    ],
+    "placements": [
+      3,
+      2,
       1
     ],
     "eliminated_idx": 0,
@@ -616,6 +722,19 @@
       9,
       11
     ],
+    "placements": [
+      9,
+      8,
+      4,
+      3,
+      2,
+      1,
+      10,
+      7,
+      6,
+      5,
+      11
+    ],
     "eliminated_idx": 10,
     "eliminated_name": "Tucker Carlson",
     "voting_rule": "percent",
@@ -674,6 +793,18 @@
       7,
       10
     ],
+    "placements": [
+      9,
+      8,
+      4,
+      3,
+      2,
+      1,
+      10,
+      7,
+      6,
+      5
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Shanna Moakler",
     "voting_rule": "percent",
@@ -728,6 +859,17 @@
       3,
       8
     ],
+    "placements": [
+      9,
+      8,
+      4,
+      3,
+      2,
+      1,
+      7,
+      6,
+      5
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Harry Hamlin",
     "voting_rule": "percent",
@@ -778,6 +920,16 @@
       8,
       7
     ],
+    "placements": [
+      8,
+      4,
+      3,
+      2,
+      1,
+      7,
+      6,
+      5
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Vivica A. Fox",
     "voting_rule": "percent",
@@ -824,6 +976,15 @@
       6,
       6
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1,
+      7,
+      6,
+      5
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Willa Ford",
     "voting_rule": "percent",
@@ -860,6 +1021,13 @@
       3,
       1,
       2,
+      5
+    ],
+    "placements": [
+      4,
+      3,
+      2,
+      1,
       5
     ],
     "eliminated_idx": null,
@@ -900,6 +1068,13 @@
       1,
       5
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1,
+      5
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Jerry Springer",
     "voting_rule": "percent",
@@ -934,6 +1109,12 @@
       1,
       2
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Monique Coleman",
     "voting_rule": "percent",
@@ -964,6 +1145,11 @@
       1,
       1
     ],
+    "placements": [
+      3,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Joey Lawrence",
     "voting_rule": "percent",
@@ -988,6 +1174,10 @@
     ],
     "judge_ranks": [
       1,
+      1
+    ],
+    "placements": [
+      2,
       1
     ],
     "eliminated_idx": 0,
@@ -1052,6 +1242,19 @@
       1,
       10
     ],
+    "placements": [
+      6,
+      4,
+      8,
+      3,
+      1,
+      10,
+      11,
+      7,
+      5,
+      2,
+      9
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -1114,6 +1317,19 @@
       3,
       6
     ],
+    "placements": [
+      6,
+      4,
+      8,
+      3,
+      1,
+      10,
+      11,
+      7,
+      5,
+      2,
+      9
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Paulina Porizkova",
     "voting_rule": "percent",
@@ -1172,6 +1388,18 @@
       1,
       1
     ],
+    "placements": [
+      6,
+      4,
+      8,
+      3,
+      1,
+      10,
+      7,
+      5,
+      2,
+      9
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Shandi Finnessey",
     "voting_rule": "percent",
@@ -1226,6 +1454,17 @@
       1,
       7
     ],
+    "placements": [
+      6,
+      4,
+      8,
+      3,
+      1,
+      7,
+      5,
+      2,
+      9
+    ],
     "eliminated_idx": 8,
     "eliminated_name": "Leeza Gibbons",
     "voting_rule": "percent",
@@ -1276,6 +1515,16 @@
       7,
       3
     ],
+    "placements": [
+      6,
+      4,
+      8,
+      3,
+      1,
+      7,
+      5,
+      2
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Clyde Drexler",
     "voting_rule": "percent",
@@ -1322,6 +1571,15 @@
       6,
       3
     ],
+    "placements": [
+      6,
+      4,
+      3,
+      1,
+      7,
+      5,
+      2
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Heather Mills",
     "voting_rule": "percent",
@@ -1364,6 +1622,14 @@
       6,
       1
     ],
+    "placements": [
+      6,
+      4,
+      3,
+      1,
+      5,
+      2
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "John Ratzenberger",
     "voting_rule": "percent",
@@ -1396,6 +1662,13 @@
       0.21912350597609562
     ],
     "judge_ranks": [
+      4,
+      3,
+      1,
+      5,
+      2
+    ],
+    "placements": [
       4,
       3,
       1,
@@ -1436,6 +1709,12 @@
       3,
       1
     ],
+    "placements": [
+      4,
+      3,
+      1,
+      2
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Ian Ziering",
     "voting_rule": "percent",
@@ -1462,6 +1741,11 @@
       0.3320460681848982
     ],
     "judge_ranks": [
+      3,
+      1,
+      2
+    ],
+    "placements": [
       3,
       1,
       2
@@ -1532,6 +1816,20 @@
       5,
       5
     ],
+    "placements": [
+      5,
+      6,
+      7,
+      4,
+      9,
+      12,
+      11,
+      1,
+      2,
+      10,
+      3,
+      8
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Josie Maran",
     "voting_rule": "percent",
@@ -1594,6 +1892,19 @@
       3,
       10
     ],
+    "placements": [
+      5,
+      6,
+      7,
+      4,
+      9,
+      11,
+      1,
+      2,
+      10,
+      3,
+      8
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Albert Reed",
     "voting_rule": "percent",
@@ -1652,6 +1963,18 @@
       4,
       9
     ],
+    "placements": [
+      5,
+      6,
+      7,
+      4,
+      9,
+      1,
+      2,
+      10,
+      3,
+      8
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Wayne Newton",
     "voting_rule": "percent",
@@ -1706,6 +2029,17 @@
       5,
       9
     ],
+    "placements": [
+      5,
+      6,
+      7,
+      4,
+      9,
+      1,
+      2,
+      3,
+      8
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Floyd Mayweather Jr. ",
     "voting_rule": "percent",
@@ -1756,6 +2090,16 @@
       7,
       7
     ],
+    "placements": [
+      5,
+      6,
+      7,
+      4,
+      1,
+      2,
+      3,
+      8
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Mark Cuban",
     "voting_rule": "percent",
@@ -1802,6 +2146,15 @@
       1,
       6
     ],
+    "placements": [
+      5,
+      6,
+      7,
+      4,
+      1,
+      2,
+      3
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Sabrina Bryan",
     "voting_rule": "percent",
@@ -1844,6 +2197,14 @@
       1,
       3
     ],
+    "placements": [
+      5,
+      6,
+      4,
+      1,
+      2,
+      3
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Jane Seymour",
     "voting_rule": "percent",
@@ -1882,6 +2243,13 @@
       2,
       5
     ],
+    "placements": [
+      5,
+      4,
+      1,
+      2,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Cameron Mathison",
     "voting_rule": "percent",
@@ -1916,6 +2284,12 @@
       1,
       4
     ],
+    "placements": [
+      4,
+      1,
+      2,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Jennie Garth",
     "voting_rule": "percent",
@@ -1944,6 +2318,11 @@
     "judge_ranks": [
       2,
       1,
+      3
+    ],
+    "placements": [
+      1,
+      2,
       3
     ],
     "eliminated_idx": 2,
@@ -2012,6 +2391,20 @@
       11,
       2
     ],
+    "placements": [
+      3,
+      10,
+      8,
+      7,
+      6,
+      4,
+      2,
+      1,
+      11,
+      12,
+      9,
+      5
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -2078,6 +2471,20 @@
       9,
       3
     ],
+    "placements": [
+      3,
+      10,
+      8,
+      7,
+      6,
+      4,
+      2,
+      1,
+      11,
+      12,
+      9,
+      5
+    ],
     "eliminated_idx": 8,
     "eliminated_name": "Monica Seles",
     "voting_rule": "percent",
@@ -2136,6 +2543,18 @@
       6,
       6
     ],
+    "placements": [
+      3,
+      10,
+      8,
+      7,
+      6,
+      4,
+      2,
+      1,
+      9,
+      5
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Steve Guttenberg",
     "voting_rule": "percent",
@@ -2190,6 +2609,17 @@
       9,
       5
     ],
+    "placements": [
+      3,
+      8,
+      7,
+      6,
+      4,
+      2,
+      1,
+      9,
+      5
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Adam Carolla",
     "voting_rule": "percent",
@@ -2240,6 +2670,16 @@
       1,
       2
     ],
+    "placements": [
+      3,
+      8,
+      7,
+      6,
+      4,
+      2,
+      1,
+      5
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Priscilla Presley",
     "voting_rule": "percent",
@@ -2286,6 +2726,15 @@
       1,
       2
     ],
+    "placements": [
+      3,
+      7,
+      6,
+      4,
+      2,
+      1,
+      5
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Marlee Matlin",
     "voting_rule": "percent",
@@ -2328,6 +2777,14 @@
       2,
       4
     ],
+    "placements": [
+      3,
+      6,
+      4,
+      2,
+      1,
+      5
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Shannon Elizabeth",
     "voting_rule": "percent",
@@ -2366,6 +2823,13 @@
       2,
       3
     ],
+    "placements": [
+      3,
+      4,
+      2,
+      1,
+      5
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Mario",
     "voting_rule": "percent",
@@ -2400,6 +2864,12 @@
       3,
       1
     ],
+    "placements": [
+      3,
+      4,
+      2,
+      1
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Marissa Jaret Winokur",
     "voting_rule": "percent",
@@ -2426,6 +2896,11 @@
       0.35502958579881655
     ],
     "judge_ranks": [
+      3,
+      2,
+      1
+    ],
+    "placements": [
       3,
       2,
       1
@@ -2500,6 +2975,21 @@
       11,
       1
     ],
+    "placements": [
+      12,
+      7,
+      6,
+      4,
+      10,
+      5,
+      2,
+      13,
+      8,
+      3,
+      11,
+      9,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Ted McGinley",
     "voting_rule": "percent",
@@ -2562,6 +3052,19 @@
       10,
       1
     ],
+    "placements": [
+      7,
+      6,
+      4,
+      10,
+      5,
+      2,
+      8,
+      3,
+      11,
+      9,
+      1
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Misty May-Treanor",
     "voting_rule": "percent",
@@ -2614,6 +3117,17 @@
       4,
       4,
       8,
+      1
+    ],
+    "placements": [
+      7,
+      6,
+      4,
+      5,
+      2,
+      8,
+      3,
+      9,
       1
     ],
     "eliminated_idx": null,
@@ -2670,6 +3184,17 @@
       9,
       1
     ],
+    "placements": [
+      7,
+      6,
+      4,
+      5,
+      2,
+      8,
+      3,
+      9,
+      1
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Rocco DiSpirito",
     "voting_rule": "percent",
@@ -2720,6 +3245,16 @@
       7,
       1
     ],
+    "placements": [
+      7,
+      6,
+      4,
+      5,
+      2,
+      8,
+      3,
+      1
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Toni Braxton",
     "voting_rule": "percent",
@@ -2766,6 +3301,15 @@
       1,
       2
     ],
+    "placements": [
+      7,
+      6,
+      4,
+      5,
+      2,
+      3,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Cloris Leachman",
     "voting_rule": "percent",
@@ -2808,6 +3352,14 @@
       2,
       1
     ],
+    "placements": [
+      6,
+      4,
+      5,
+      2,
+      3,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Susan Lucci",
     "voting_rule": "percent",
@@ -2846,6 +3398,13 @@
       3,
       1
     ],
+    "placements": [
+      4,
+      5,
+      2,
+      3,
+      1
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Maurice Greene",
     "voting_rule": "percent",
@@ -2880,6 +3439,12 @@
       1,
       2
     ],
+    "placements": [
+      4,
+      2,
+      3,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Cody Linley",
     "voting_rule": "percent",
@@ -2908,6 +3473,11 @@
     "judge_ranks": [
       2,
       2,
+      1
+    ],
+    "placements": [
+      2,
+      3,
       1
     ],
     "eliminated_idx": 1,
@@ -2980,6 +3550,21 @@
       7,
       2
     ],
+    "placements": [
+      2,
+      12,
+      9,
+      7,
+      4,
+      1,
+      10,
+      13,
+      6,
+      5,
+      8,
+      11,
+      3
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -3050,6 +3635,21 @@
       9,
       2
     ],
+    "placements": [
+      2,
+      12,
+      9,
+      7,
+      4,
+      1,
+      10,
+      13,
+      6,
+      5,
+      8,
+      11,
+      3
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Belinda Carlisle",
     "voting_rule": "percent",
@@ -3116,6 +3716,20 @@
       9,
       1
     ],
+    "placements": [
+      2,
+      12,
+      9,
+      7,
+      4,
+      1,
+      10,
+      6,
+      5,
+      8,
+      11,
+      3
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Denise Richards",
     "voting_rule": "percent",
@@ -3178,6 +3792,19 @@
       9,
       2
     ],
+    "placements": [
+      2,
+      9,
+      7,
+      4,
+      1,
+      10,
+      6,
+      5,
+      8,
+      11,
+      3
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Steve Wozniak",
     "voting_rule": "percent",
@@ -3232,6 +3859,17 @@
       9,
       4
     ],
+    "placements": [
+      2,
+      9,
+      7,
+      4,
+      1,
+      6,
+      5,
+      8,
+      3
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "David Alan Grier",
     "voting_rule": "percent",
@@ -3282,6 +3920,16 @@
       8,
       2
     ],
+    "placements": [
+      2,
+      7,
+      4,
+      1,
+      6,
+      5,
+      8,
+      3
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Steve-O",
     "voting_rule": "percent",
@@ -3328,6 +3976,15 @@
       5,
       1
     ],
+    "placements": [
+      2,
+      7,
+      4,
+      1,
+      6,
+      5,
+      3
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Lawrence Taylor",
     "voting_rule": "percent",
@@ -3370,6 +4027,14 @@
       1,
       6
     ],
+    "placements": [
+      2,
+      4,
+      1,
+      6,
+      5,
+      3
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Chuck Wicks",
     "voting_rule": "percent",
@@ -3408,6 +4073,13 @@
       4,
       1
     ],
+    "placements": [
+      2,
+      4,
+      1,
+      5,
+      3
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Lil' Kim",
     "voting_rule": "percent",
@@ -3442,6 +4114,12 @@
       2,
       3
     ],
+    "placements": [
+      2,
+      4,
+      1,
+      3
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Ty Murray",
     "voting_rule": "percent",
@@ -3468,6 +4146,11 @@
       0.32571428571428573
     ],
     "judge_ranks": [
+      2,
+      1,
+      3
+    ],
+    "placements": [
       2,
       1,
       3
@@ -3554,6 +4237,24 @@
       5,
       4
     ],
+    "placements": [
+      16,
+      12,
+      9,
+      6,
+      11,
+      10,
+      8,
+      7,
+      4,
+      14,
+      13,
+      15,
+      5,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Ashley Hamiliton",
     "voting_rule": "percent",
@@ -3628,6 +4329,22 @@
       3,
       9
     ],
+    "placements": [
+      12,
+      9,
+      6,
+      11,
+      10,
+      8,
+      7,
+      4,
+      14,
+      13,
+      5,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 8,
     "eliminated_name": "Kathy Ireland",
     "voting_rule": "percent",
@@ -3698,6 +4415,21 @@
       4,
       6
     ],
+    "placements": [
+      12,
+      9,
+      6,
+      11,
+      10,
+      8,
+      7,
+      4,
+      13,
+      5,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Debi Mazar",
     "voting_rule": "percent",
@@ -3760,6 +4492,19 @@
       4,
       6
     ],
+    "placements": [
+      9,
+      6,
+      11,
+      10,
+      8,
+      7,
+      4,
+      5,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Chuck Liddell",
     "voting_rule": "percent",
@@ -3818,6 +4563,18 @@
       1,
       4
     ],
+    "placements": [
+      9,
+      6,
+      10,
+      8,
+      7,
+      4,
+      5,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Natalie Coughlin",
     "voting_rule": "percent",
@@ -3872,6 +4629,17 @@
       5,
       6
     ],
+    "placements": [
+      9,
+      6,
+      8,
+      7,
+      4,
+      5,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Melissa Joan Hart",
     "voting_rule": "percent",
@@ -3918,6 +4686,15 @@
       3,
       3
     ],
+    "placements": [
+      6,
+      7,
+      4,
+      5,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Mark Dacascos",
     "voting_rule": "percent",
@@ -3956,6 +4733,13 @@
       4,
       3
     ],
+    "placements": [
+      4,
+      5,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Aaron Carter",
     "voting_rule": "percent",
@@ -3990,6 +4774,12 @@
       4,
       3
     ],
+    "placements": [
+      4,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Joanna Krupa",
     "voting_rule": "percent",
@@ -4016,6 +4806,11 @@
       0.305519216233502
     ],
     "judge_ranks": [
+      2,
+      1,
+      3
+    ],
+    "placements": [
       2,
       1,
       3
@@ -4082,6 +4877,19 @@
       9,
       5
     ],
+    "placements": [
+      9,
+      11,
+      5,
+      10,
+      4,
+      2,
+      6,
+      1,
+      3,
+      8,
+      7
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -4144,6 +4952,19 @@
       10,
       6
     ],
+    "placements": [
+      9,
+      11,
+      5,
+      10,
+      4,
+      2,
+      6,
+      1,
+      3,
+      8,
+      7
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Shannen Doherty",
     "voting_rule": "percent",
@@ -4202,6 +5023,18 @@
       9,
       4
     ],
+    "placements": [
+      9,
+      5,
+      10,
+      4,
+      2,
+      6,
+      1,
+      3,
+      8,
+      7
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Buzz Aldrin",
     "voting_rule": "percent",
@@ -4256,6 +5089,17 @@
       9,
       6
     ],
+    "placements": [
+      9,
+      5,
+      4,
+      2,
+      6,
+      1,
+      3,
+      8,
+      7
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Aiden Turner",
     "voting_rule": "percent",
@@ -4306,6 +5150,16 @@
       8,
       3
     ],
+    "placements": [
+      5,
+      4,
+      2,
+      6,
+      1,
+      3,
+      8,
+      7
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Kate Gosselin",
     "voting_rule": "percent",
@@ -4352,6 +5206,15 @@
       2,
       7
     ],
+    "placements": [
+      5,
+      4,
+      2,
+      6,
+      1,
+      3,
+      7
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Jake Pavelka",
     "voting_rule": "percent",
@@ -4394,6 +5257,14 @@
       1,
       4
     ],
+    "placements": [
+      5,
+      4,
+      2,
+      6,
+      1,
+      3
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Pamela Anderson",
     "voting_rule": "percent",
@@ -4432,6 +5303,13 @@
       1,
       2
     ],
+    "placements": [
+      5,
+      4,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Niecy Nash",
     "voting_rule": "percent",
@@ -4466,6 +5344,12 @@
       1,
       3
     ],
+    "placements": [
+      4,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Chad Ochocinco",
     "voting_rule": "percent",
@@ -4495,6 +5379,11 @@
       3,
       1,
       2
+    ],
+    "placements": [
+      2,
+      1,
+      3
     ],
     "eliminated_idx": 2,
     "eliminated_name": "Erin Andrews",
@@ -4562,6 +5451,20 @@
       5,
       7
     ],
+    "placements": [
+      12,
+      8,
+      2,
+      1,
+      6,
+      5,
+      10,
+      11,
+      4,
+      9,
+      7,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "David Hasselhoff",
     "voting_rule": "percent",
@@ -4624,6 +5527,19 @@
       2,
       3
     ],
+    "placements": [
+      8,
+      2,
+      1,
+      6,
+      5,
+      10,
+      11,
+      4,
+      9,
+      7,
+      3
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Michael Bolton",
     "voting_rule": "percent",
@@ -4682,6 +5598,18 @@
       1,
       9
     ],
+    "placements": [
+      8,
+      2,
+      1,
+      6,
+      5,
+      10,
+      4,
+      9,
+      7,
+      3
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Margaret Cho",
     "voting_rule": "percent",
@@ -4736,6 +5664,17 @@
       3,
       8
     ],
+    "placements": [
+      8,
+      2,
+      1,
+      6,
+      5,
+      4,
+      9,
+      7,
+      3
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "The Situation",
     "voting_rule": "percent",
@@ -4786,6 +5725,16 @@
       5,
       8
     ],
+    "placements": [
+      8,
+      2,
+      1,
+      6,
+      5,
+      4,
+      7,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Florence Henderson",
     "voting_rule": "percent",
@@ -4832,6 +5781,15 @@
       2,
       6
     ],
+    "placements": [
+      2,
+      1,
+      6,
+      5,
+      4,
+      7,
+      3
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Audrina Patridge",
     "voting_rule": "percent",
@@ -4874,6 +5832,14 @@
       1,
       6
     ],
+    "placements": [
+      2,
+      1,
+      6,
+      5,
+      4,
+      3
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Rick Fox",
     "voting_rule": "percent",
@@ -4912,6 +5878,13 @@
       1,
       5
     ],
+    "placements": [
+      2,
+      1,
+      5,
+      4,
+      3
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Kurt Warner",
     "voting_rule": "percent",
@@ -4946,6 +5919,12 @@
       3,
       4
     ],
+    "placements": [
+      2,
+      1,
+      4,
+      3
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Brandy",
     "voting_rule": "percent",
@@ -4972,6 +5951,11 @@
       0.3092368897274452
     ],
     "judge_ranks": [
+      2,
+      1,
+      3
+    ],
+    "placements": [
       2,
       1,
       3
@@ -5038,6 +6022,19 @@
       10,
       7
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1,
+      9,
+      7,
+      8,
+      11,
+      5,
+      10,
+      6
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -5100,6 +6097,19 @@
       9,
       6
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1,
+      9,
+      7,
+      8,
+      11,
+      5,
+      10,
+      6
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Mike Catherwood",
     "voting_rule": "percent",
@@ -5158,6 +6168,18 @@
       10,
       3
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1,
+      9,
+      7,
+      8,
+      5,
+      10,
+      6
+    ],
     "eliminated_idx": 8,
     "eliminated_name": "Wendy Williams",
     "voting_rule": "percent",
@@ -5212,6 +6234,17 @@
       4,
       9
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1,
+      9,
+      7,
+      8,
+      5,
+      6
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Sugar Ray Leonard",
     "voting_rule": "percent",
@@ -5262,6 +6295,16 @@
       2,
       6
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1,
+      7,
+      8,
+      5,
+      6
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Petra Nemcova",
     "voting_rule": "percent",
@@ -5308,6 +6351,15 @@
       1,
       5
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1,
+      7,
+      5,
+      6
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Chris Jericho",
     "voting_rule": "percent",
@@ -5350,6 +6402,14 @@
       5,
       4
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1,
+      5,
+      6
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Kendra Wilkinson",
     "voting_rule": "percent",
@@ -5388,6 +6448,13 @@
       2,
       4
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1,
+      5
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Romeo",
     "voting_rule": "percent",
@@ -5422,6 +6489,12 @@
       3,
       2
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Ralph Macchio",
     "voting_rule": "percent",
@@ -5450,6 +6523,11 @@
     "judge_ranks": [
       1,
       3,
+      1
+    ],
+    "placements": [
+      3,
+      2,
       1
     ],
     "eliminated_idx": 0,
@@ -5518,6 +6596,20 @@
       9,
       9
     ],
+    "placements": [
+      11,
+      6,
+      3,
+      1,
+      12,
+      4,
+      9,
+      10,
+      8,
+      7,
+      5,
+      2
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Metta World Peace (Ron)",
     "voting_rule": "percent",
@@ -5580,6 +6672,19 @@
       4,
       4
     ],
+    "placements": [
+      11,
+      6,
+      3,
+      1,
+      4,
+      9,
+      10,
+      8,
+      7,
+      5,
+      2
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Elisabetta Canalis",
     "voting_rule": "percent",
@@ -5638,6 +6743,18 @@
       9,
       4
     ],
+    "placements": [
+      6,
+      3,
+      1,
+      4,
+      9,
+      10,
+      8,
+      7,
+      5,
+      2
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Kristin Cavallari",
     "voting_rule": "percent",
@@ -5692,6 +6809,17 @@
       6,
       3
     ],
+    "placements": [
+      6,
+      3,
+      1,
+      4,
+      9,
+      8,
+      7,
+      5,
+      2
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Chynna Phillips",
     "voting_rule": "percent",
@@ -5742,6 +6870,16 @@
       6,
       2
     ],
+    "placements": [
+      6,
+      3,
+      1,
+      4,
+      8,
+      7,
+      5,
+      2
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Carson Kressley",
     "voting_rule": "percent",
@@ -5788,6 +6926,15 @@
       3,
       5
     ],
+    "placements": [
+      6,
+      3,
+      1,
+      4,
+      7,
+      5,
+      2
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Chaz Bono",
     "voting_rule": "percent",
@@ -5830,6 +6977,14 @@
       6,
       2
     ],
+    "placements": [
+      6,
+      3,
+      1,
+      4,
+      5,
+      2
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "David Arquette",
     "voting_rule": "percent",
@@ -5868,6 +7023,13 @@
       5,
       4
     ],
+    "placements": [
+      3,
+      1,
+      4,
+      5,
+      2
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Nancy Grace",
     "voting_rule": "percent",
@@ -5902,6 +7064,12 @@
       4,
       2
     ],
+    "placements": [
+      3,
+      1,
+      4,
+      2
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Hope Solo",
     "voting_rule": "percent",
@@ -5931,6 +7099,11 @@
       3,
       2,
       1
+    ],
+    "placements": [
+      3,
+      1,
+      2
     ],
     "eliminated_idx": 0,
     "eliminated_name": "Ricki Lake",
@@ -5998,6 +7171,20 @@
       1,
       8
     ],
+    "placements": [
+      3,
+      11,
+      10,
+      7,
+      6,
+      5,
+      12,
+      1,
+      9,
+      8,
+      2,
+      4
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -6064,6 +7251,20 @@
       1,
       3
     ],
+    "placements": [
+      3,
+      11,
+      10,
+      7,
+      6,
+      5,
+      12,
+      1,
+      9,
+      8,
+      2,
+      4
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Martina Navratilova",
     "voting_rule": "percent",
@@ -6126,6 +7327,19 @@
       1,
       3
     ],
+    "placements": [
+      3,
+      11,
+      10,
+      7,
+      6,
+      5,
+      1,
+      9,
+      8,
+      2,
+      4
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Jack Wagner",
     "voting_rule": "percent",
@@ -6184,6 +7398,18 @@
       4,
       2
     ],
+    "placements": [
+      3,
+      10,
+      7,
+      6,
+      5,
+      1,
+      9,
+      8,
+      2,
+      4
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Sherri Sheperd",
     "voting_rule": "percent",
@@ -6238,6 +7464,17 @@
       1,
       3
     ],
+    "placements": [
+      3,
+      7,
+      6,
+      5,
+      1,
+      9,
+      8,
+      2,
+      4
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Gavin DeGraw",
     "voting_rule": "percent",
@@ -6288,6 +7525,16 @@
       1,
       6
     ],
+    "placements": [
+      3,
+      7,
+      6,
+      5,
+      1,
+      8,
+      2,
+      4
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Gladys Knight",
     "voting_rule": "percent",
@@ -6334,6 +7581,15 @@
       2,
       1
     ],
+    "placements": [
+      3,
+      7,
+      6,
+      5,
+      1,
+      2,
+      4
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Jaleel White",
     "voting_rule": "percent",
@@ -6376,6 +7632,14 @@
       3,
       5
     ],
+    "placements": [
+      3,
+      6,
+      5,
+      1,
+      2,
+      4
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Roshon Fegan",
     "voting_rule": "percent",
@@ -6410,6 +7674,12 @@
       4,
       1
     ],
+    "placements": [
+      3,
+      1,
+      2,
+      4
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Maria Menounos",
     "voting_rule": "percent",
@@ -6439,6 +7709,11 @@
       2,
       2,
       1
+    ],
+    "placements": [
+      3,
+      1,
+      2
     ],
     "eliminated_idx": 0,
     "eliminated_name": "William Levy",
@@ -6510,6 +7785,21 @@
       11,
       9
     ],
+    "placements": [
+      6,
+      8,
+      7,
+      3,
+      5,
+      4,
+      2,
+      13,
+      10,
+      12,
+      11,
+      9,
+      1
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Pamela Anderson",
     "voting_rule": "percent",
@@ -6576,6 +7866,20 @@
       12,
       5
     ],
+    "placements": [
+      6,
+      8,
+      7,
+      3,
+      5,
+      4,
+      2,
+      10,
+      12,
+      11,
+      9,
+      1
+    ],
     "eliminated_idx": 8,
     "eliminated_name": "Joey Fatone",
     "voting_rule": "percent",
@@ -6638,6 +7942,19 @@
       11,
       1
     ],
+    "placements": [
+      6,
+      8,
+      7,
+      3,
+      5,
+      4,
+      2,
+      10,
+      11,
+      9,
+      1
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Helio Castroneves",
     "voting_rule": "percent",
@@ -6692,6 +8009,17 @@
       8,
       4
     ],
+    "placements": [
+      6,
+      8,
+      7,
+      3,
+      5,
+      4,
+      2,
+      9,
+      1
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Bristol Palin",
     "voting_rule": "percent",
@@ -6741,6 +8069,16 @@
       6,
       2,
       2
+    ],
+    "placements": [
+      6,
+      8,
+      7,
+      3,
+      5,
+      4,
+      2,
+      1
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -6792,6 +8130,16 @@
       4,
       3
     ],
+    "placements": [
+      6,
+      8,
+      7,
+      3,
+      5,
+      4,
+      2,
+      1
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Sabrina Bryan",
     "voting_rule": "percent",
@@ -6834,6 +8182,15 @@
       7,
       3,
       6,
+      4,
+      2,
+      1
+    ],
+    "placements": [
+      6,
+      7,
+      3,
+      5,
       4,
       2,
       1
@@ -6884,6 +8241,15 @@
       6,
       1
     ],
+    "placements": [
+      6,
+      7,
+      3,
+      5,
+      4,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Gilles Marini",
     "voting_rule": "percent",
@@ -6922,6 +8288,13 @@
       1,
       2
     ],
+    "placements": [
+      3,
+      5,
+      4,
+      2,
+      1
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Apolo Anton Ohno",
     "voting_rule": "percent",
@@ -6950,6 +8323,11 @@
     "judge_ranks": [
       2,
       3,
+      1
+    ],
+    "placements": [
+      3,
+      2,
       1
     ],
     "eliminated_idx": 0,
@@ -7018,6 +8396,20 @@
       8,
       7
     ],
+    "placements": [
+      5,
+      2,
+      12,
+      8,
+      4,
+      3,
+      9,
+      7,
+      11,
+      1,
+      10,
+      6
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -7084,6 +8476,20 @@
       8,
       5
     ],
+    "placements": [
+      5,
+      2,
+      12,
+      8,
+      4,
+      3,
+      9,
+      7,
+      11,
+      1,
+      10,
+      6
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Dorothy Hamill",
     "voting_rule": "percent",
@@ -7146,6 +8552,19 @@
       6,
       6
     ],
+    "placements": [
+      5,
+      2,
+      8,
+      4,
+      3,
+      9,
+      7,
+      11,
+      1,
+      10,
+      6
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Wynonna Judd",
     "voting_rule": "percent",
@@ -7204,6 +8623,18 @@
       9,
       8
     ],
+    "placements": [
+      5,
+      2,
+      8,
+      4,
+      3,
+      9,
+      7,
+      1,
+      10,
+      6
+    ],
     "eliminated_idx": 8,
     "eliminated_name": "Lisa Vanderpump",
     "voting_rule": "percent",
@@ -7258,6 +8689,17 @@
       2,
       5
     ],
+    "placements": [
+      5,
+      2,
+      8,
+      4,
+      3,
+      9,
+      7,
+      1,
+      6
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "D. L. Hughley",
     "voting_rule": "percent",
@@ -7308,6 +8750,16 @@
       1,
       4
     ],
+    "placements": [
+      5,
+      2,
+      8,
+      4,
+      3,
+      7,
+      1,
+      6
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Victor Ortiz",
     "voting_rule": "percent",
@@ -7354,6 +8806,15 @@
       3,
       6
     ],
+    "placements": [
+      5,
+      2,
+      4,
+      3,
+      7,
+      1,
+      6
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Andy Dick",
     "voting_rule": "percent",
@@ -7396,6 +8857,14 @@
       3,
       6
     ],
+    "placements": [
+      5,
+      2,
+      4,
+      3,
+      1,
+      6
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Sean Lowe",
     "voting_rule": "percent",
@@ -7434,6 +8903,13 @@
       1,
       3
     ],
+    "placements": [
+      5,
+      2,
+      4,
+      3,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Ingo Rademacher",
     "voting_rule": "percent",
@@ -7466,6 +8942,12 @@
       1,
       3,
       4,
+      1
+    ],
+    "placements": [
+      2,
+      4,
+      3,
       1
     ],
     "eliminated_idx": 1,
@@ -7534,6 +9016,20 @@
       4,
       12
     ],
+    "placements": [
+      10,
+      7,
+      6,
+      5,
+      2,
+      1,
+      12,
+      4,
+      9,
+      8,
+      3,
+      11
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -7600,6 +9096,20 @@
       4,
       12
     ],
+    "placements": [
+      10,
+      7,
+      6,
+      5,
+      2,
+      1,
+      12,
+      4,
+      9,
+      8,
+      3,
+      11
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Keyshawn Johnson",
     "voting_rule": "percent",
@@ -7662,6 +9172,19 @@
       9,
       10
     ],
+    "placements": [
+      10,
+      7,
+      6,
+      5,
+      2,
+      1,
+      4,
+      9,
+      8,
+      3,
+      11
+    ],
     "eliminated_idx": 10,
     "eliminated_name": "Bill Nye",
     "voting_rule": "percent",
@@ -7720,6 +9243,18 @@
       4,
       4
     ],
+    "placements": [
+      10,
+      7,
+      6,
+      5,
+      2,
+      1,
+      4,
+      9,
+      8,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Valerie Harper",
     "voting_rule": "percent",
@@ -7774,6 +9309,17 @@
       3,
       3
     ],
+    "placements": [
+      7,
+      6,
+      5,
+      2,
+      1,
+      4,
+      9,
+      8,
+      3
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Christina Milian",
     "voting_rule": "percent",
@@ -7823,6 +9369,16 @@
       8,
       4,
       7
+    ],
+    "placements": [
+      7,
+      6,
+      5,
+      2,
+      1,
+      4,
+      8,
+      3
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -7874,6 +9430,16 @@
       5,
       3
     ],
+    "placements": [
+      7,
+      6,
+      5,
+      2,
+      1,
+      4,
+      8,
+      3
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Nicole \"Snooki\" Polizzi",
     "voting_rule": "percent",
@@ -7920,6 +9486,15 @@
       7,
       1
     ],
+    "placements": [
+      7,
+      6,
+      5,
+      2,
+      1,
+      4,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Brant Daugherty",
     "voting_rule": "percent",
@@ -7962,6 +9537,14 @@
       6,
       3
     ],
+    "placements": [
+      6,
+      5,
+      2,
+      1,
+      4,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Elizabeth Berkley Lauren",
     "voting_rule": "percent",
@@ -8000,6 +9583,13 @@
       5,
       3
     ],
+    "placements": [
+      5,
+      2,
+      1,
+      4,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Leah Remini",
     "voting_rule": "percent",
@@ -8029,6 +9619,12 @@
       0.24454189279594477
     ],
     "judge_ranks": [
+      2,
+      1,
+      4,
+      3
+    ],
+    "placements": [
       2,
       1,
       4,
@@ -8100,6 +9696,20 @@
       6,
       7
     ],
+    "placements": [
+      10,
+      6,
+      4,
+      3,
+      11,
+      12,
+      5,
+      2,
+      1,
+      8,
+      9,
+      7
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Diana Nyad",
     "voting_rule": "percent",
@@ -8162,6 +9772,19 @@
       6,
       7
     ],
+    "placements": [
+      10,
+      6,
+      4,
+      3,
+      11,
+      5,
+      2,
+      1,
+      8,
+      9,
+      7
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Billy Dee Williams",
     "voting_rule": "percent",
@@ -8215,6 +9838,17 @@
       9,
       6,
       8
+    ],
+    "placements": [
+      6,
+      4,
+      3,
+      5,
+      2,
+      1,
+      8,
+      9,
+      7
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -8270,6 +9904,17 @@
       8,
       6
     ],
+    "placements": [
+      6,
+      4,
+      3,
+      5,
+      2,
+      1,
+      8,
+      9,
+      7
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -8324,6 +9969,17 @@
       8,
       5
     ],
+    "placements": [
+      6,
+      4,
+      3,
+      5,
+      2,
+      1,
+      8,
+      9,
+      7
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Cody Simpson",
     "voting_rule": "percent",
@@ -8374,6 +10030,16 @@
       7,
       6
     ],
+    "placements": [
+      6,
+      4,
+      3,
+      5,
+      2,
+      1,
+      8,
+      7
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Drew Carey",
     "voting_rule": "percent",
@@ -8414,6 +10080,15 @@
     "judge_ranks": [
       4,
       6,
+      3,
+      5,
+      2,
+      1,
+      7
+    ],
+    "placements": [
+      6,
+      4,
       3,
       5,
       2,
@@ -8462,6 +10137,14 @@
       1,
       4
     ],
+    "placements": [
+      6,
+      4,
+      3,
+      5,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Danica McKellar",
     "voting_rule": "percent",
@@ -8500,6 +10183,13 @@
       2,
       1
     ],
+    "placements": [
+      4,
+      3,
+      5,
+      2,
+      1
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Charlie White",
     "voting_rule": "percent",
@@ -8531,6 +10221,12 @@
     "judge_ranks": [
       3,
       4,
+      2,
+      1
+    ],
+    "placements": [
+      4,
+      3,
       2,
       1
     ],
@@ -8604,6 +10300,21 @@
       3,
       2
     ],
+    "placements": [
+      8,
+      9,
+      6,
+      3,
+      1,
+      13,
+      11,
+      5,
+      10,
+      7,
+      12,
+      4,
+      2
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Lolo Jones",
     "voting_rule": "percent",
@@ -8670,6 +10381,20 @@
       3,
       5
     ],
+    "placements": [
+      8,
+      9,
+      6,
+      3,
+      1,
+      11,
+      5,
+      10,
+      7,
+      12,
+      4,
+      2
+    ],
     "eliminated_idx": 9,
     "eliminated_name": "Tavis Smiley",
     "voting_rule": "percent",
@@ -8732,6 +10457,19 @@
       1,
       4
     ],
+    "placements": [
+      8,
+      9,
+      6,
+      3,
+      1,
+      11,
+      5,
+      10,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Randy Couture",
     "voting_rule": "percent",
@@ -8790,6 +10528,18 @@
       5,
       3
     ],
+    "placements": [
+      8,
+      9,
+      6,
+      3,
+      1,
+      5,
+      10,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Betsey Johnson",
     "voting_rule": "percent",
@@ -8843,6 +10593,17 @@
       9,
       5,
       1
+    ],
+    "placements": [
+      8,
+      9,
+      6,
+      3,
+      1,
+      5,
+      7,
+      4,
+      2
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -8898,6 +10659,17 @@
       2,
       3
     ],
+    "placements": [
+      8,
+      9,
+      6,
+      3,
+      1,
+      5,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Jonathan Bennett",
     "voting_rule": "percent",
@@ -8948,6 +10720,16 @@
       1,
       5
     ],
+    "placements": [
+      8,
+      6,
+      3,
+      1,
+      5,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Antonio Sabato Jr.",
     "voting_rule": "percent",
@@ -8994,6 +10776,15 @@
       3,
       4
     ],
+    "placements": [
+      6,
+      3,
+      1,
+      5,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Michael Waltrip",
     "voting_rule": "percent",
@@ -9036,6 +10827,14 @@
       3,
       4
     ],
+    "placements": [
+      6,
+      3,
+      1,
+      5,
+      4,
+      2
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Lea Thompson",
     "voting_rule": "percent",
@@ -9074,6 +10873,13 @@
       2,
       4
     ],
+    "placements": [
+      3,
+      1,
+      5,
+      4,
+      2
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Tommy Chong",
     "voting_rule": "percent",
@@ -9103,6 +10909,12 @@
       0.25159883070113154
     ],
     "judge_ranks": [
+      3,
+      1,
+      4,
+      2
+    ],
+    "placements": [
       3,
       1,
       4,
@@ -9174,6 +10986,20 @@
       8,
       5
     ],
+    "placements": [
+      9,
+      7,
+      2,
+      1,
+      4,
+      10,
+      6,
+      11,
+      3,
+      12,
+      8,
+      5
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -9240,6 +11066,20 @@
       6,
       12
     ],
+    "placements": [
+      9,
+      7,
+      2,
+      1,
+      4,
+      10,
+      6,
+      11,
+      3,
+      12,
+      8,
+      5
+    ],
     "eliminated_idx": 9,
     "eliminated_name": "Redfoo",
     "voting_rule": "percent",
@@ -9302,6 +11142,19 @@
       10,
       7
     ],
+    "placements": [
+      9,
+      7,
+      2,
+      1,
+      4,
+      10,
+      6,
+      11,
+      3,
+      8,
+      5
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Charlotte McKinney",
     "voting_rule": "percent",
@@ -9360,6 +11213,18 @@
       7,
       10
     ],
+    "placements": [
+      9,
+      7,
+      2,
+      1,
+      4,
+      10,
+      6,
+      3,
+      8,
+      5
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Michael Sam",
     "voting_rule": "percent",
@@ -9414,6 +11279,17 @@
       7,
       7
     ],
+    "placements": [
+      9,
+      7,
+      2,
+      1,
+      4,
+      6,
+      3,
+      8,
+      5
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Suzanne Somers",
     "voting_rule": "percent",
@@ -9464,6 +11340,16 @@
       6,
       5
     ],
+    "placements": [
+      7,
+      2,
+      1,
+      4,
+      6,
+      3,
+      8,
+      5
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Patti LaBelle",
     "voting_rule": "percent",
@@ -9510,6 +11396,15 @@
       3,
       6
     ],
+    "placements": [
+      7,
+      2,
+      1,
+      4,
+      6,
+      3,
+      5
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Willow Shields",
     "voting_rule": "percent",
@@ -9552,6 +11447,14 @@
       5,
       4
     ],
+    "placements": [
+      2,
+      1,
+      4,
+      6,
+      3,
+      5
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Robert Herjavec",
     "voting_rule": "percent",
@@ -9586,6 +11489,12 @@
       1,
       4
     ],
+    "placements": [
+      2,
+      1,
+      4,
+      3
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Nastia Liukin",
     "voting_rule": "percent",
@@ -9613,6 +11522,11 @@
     ],
     "judge_ranks": [
       1,
+      1,
+      3
+    ],
+    "placements": [
+      2,
       1,
       3
     ],
@@ -9686,6 +11600,21 @@
       13,
       9
     ],
+    "placements": [
+      10,
+      6,
+      4,
+      12,
+      3,
+      13,
+      7,
+      5,
+      2,
+      8,
+      1,
+      11,
+      9
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -9756,6 +11685,21 @@
       9,
       9
     ],
+    "placements": [
+      10,
+      6,
+      4,
+      12,
+      3,
+      13,
+      7,
+      5,
+      2,
+      8,
+      1,
+      11,
+      9
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Victor Espinoza",
     "voting_rule": "percent",
@@ -9813,6 +11757,18 @@
       7,
       5,
       10
+    ],
+    "placements": [
+      10,
+      6,
+      4,
+      3,
+      7,
+      5,
+      2,
+      8,
+      1,
+      9
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -9872,6 +11828,18 @@
       1,
       9
     ],
+    "placements": [
+      10,
+      6,
+      4,
+      3,
+      7,
+      5,
+      2,
+      8,
+      1,
+      9
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Gary Busey",
     "voting_rule": "percent",
@@ -9924,6 +11892,17 @@
       5,
       6,
       3,
+      9
+    ],
+    "placements": [
+      6,
+      4,
+      3,
+      7,
+      5,
+      2,
+      8,
+      1,
       9
     ],
     "eliminated_idx": null,
@@ -9980,6 +11959,17 @@
       1,
       9
     ],
+    "placements": [
+      6,
+      4,
+      3,
+      7,
+      5,
+      2,
+      8,
+      1,
+      9
+    ],
     "eliminated_idx": 8,
     "eliminated_name": "Paula Deen",
     "voting_rule": "percent",
@@ -10030,6 +12020,16 @@
       2,
       1
     ],
+    "placements": [
+      6,
+      4,
+      3,
+      7,
+      5,
+      2,
+      8,
+      1
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Hayes Grier",
     "voting_rule": "percent",
@@ -10076,6 +12076,15 @@
       1,
       3
     ],
+    "placements": [
+      6,
+      4,
+      3,
+      7,
+      5,
+      2,
+      1
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Andy Grammer",
     "voting_rule": "percent",
@@ -10118,6 +12127,14 @@
       3,
       1
     ],
+    "placements": [
+      6,
+      4,
+      3,
+      5,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Alexa PenaVega",
     "voting_rule": "percent",
@@ -10152,6 +12169,12 @@
       4,
       1
     ],
+    "placements": [
+      4,
+      3,
+      2,
+      1
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -10184,6 +12207,12 @@
       1,
       4,
       1,
+      1
+    ],
+    "placements": [
+      4,
+      3,
+      2,
       1
     ],
     "eliminated_idx": 0,
@@ -10252,6 +12281,20 @@
       1,
       4
     ],
+    "placements": [
+      11,
+      8,
+      6,
+      9,
+      7,
+      5,
+      2,
+      12,
+      1,
+      3,
+      4,
+      10
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -10318,6 +12361,20 @@
       1,
       5
     ],
+    "placements": [
+      11,
+      8,
+      6,
+      9,
+      7,
+      5,
+      2,
+      12,
+      1,
+      3,
+      4,
+      10
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Geraldo Rivera",
     "voting_rule": "percent",
@@ -10380,6 +12437,19 @@
       2,
       6
     ],
+    "placements": [
+      11,
+      8,
+      6,
+      9,
+      7,
+      5,
+      2,
+      1,
+      3,
+      4,
+      10
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Mischa Barton",
     "voting_rule": "percent",
@@ -10438,6 +12508,18 @@
       3,
       8
     ],
+    "placements": [
+      8,
+      6,
+      9,
+      7,
+      5,
+      2,
+      1,
+      3,
+      4,
+      10
+    ],
     "eliminated_idx": 9,
     "eliminated_name": "Marla Maples",
     "voting_rule": "percent",
@@ -10491,6 +12573,17 @@
       1,
       3,
       5
+    ],
+    "placements": [
+      8,
+      6,
+      9,
+      7,
+      5,
+      2,
+      1,
+      3,
+      4
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -10546,6 +12639,17 @@
       6,
       1
     ],
+    "placements": [
+      8,
+      6,
+      9,
+      7,
+      5,
+      2,
+      1,
+      3,
+      4
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Doug Flutie",
     "voting_rule": "percent",
@@ -10596,6 +12700,16 @@
       2,
       2
     ],
+    "placements": [
+      8,
+      6,
+      7,
+      5,
+      2,
+      1,
+      3,
+      4
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Kim Fields",
     "voting_rule": "percent",
@@ -10638,6 +12752,14 @@
       1,
       6
     ],
+    "placements": [
+      6,
+      5,
+      2,
+      1,
+      3,
+      4
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Jodie Sweetin",
     "voting_rule": "percent",
@@ -10676,6 +12798,13 @@
       4,
       1
     ],
+    "placements": [
+      5,
+      2,
+      1,
+      3,
+      4
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Antonio Brown",
     "voting_rule": "percent",
@@ -10704,6 +12833,11 @@
     "judge_ranks": [
       1,
       2,
+      3
+    ],
+    "placements": [
+      2,
+      1,
       3
     ],
     "eliminated_idx": 2,
@@ -10776,6 +12910,21 @@
       3,
       7
     ],
+    "placements": [
+      13,
+      8,
+      6,
+      7,
+      3,
+      1,
+      9,
+      12,
+      2,
+      11,
+      10,
+      4,
+      5
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -10846,6 +12995,21 @@
       4,
       2
     ],
+    "placements": [
+      13,
+      8,
+      6,
+      7,
+      3,
+      1,
+      9,
+      12,
+      2,
+      11,
+      10,
+      4,
+      5
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Jake T. Austin",
     "voting_rule": "percent",
@@ -10912,6 +13076,20 @@
       7,
       3
     ],
+    "placements": [
+      8,
+      6,
+      7,
+      3,
+      1,
+      9,
+      12,
+      2,
+      11,
+      10,
+      4,
+      5
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Rick Perry",
     "voting_rule": "percent",
@@ -10974,6 +13152,19 @@
       6,
       3
     ],
+    "placements": [
+      8,
+      6,
+      7,
+      3,
+      1,
+      9,
+      2,
+      11,
+      10,
+      4,
+      5
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Babyface",
     "voting_rule": "percent",
@@ -11027,6 +13218,17 @@
       1,
       4,
       2
+    ],
+    "placements": [
+      8,
+      6,
+      7,
+      3,
+      1,
+      9,
+      2,
+      4,
+      5
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -11082,6 +13284,17 @@
       1,
       7
     ],
+    "placements": [
+      8,
+      6,
+      7,
+      3,
+      1,
+      9,
+      2,
+      4,
+      5
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Amber Rose",
     "voting_rule": "percent",
@@ -11132,6 +13345,16 @@
       3,
       3
     ],
+    "placements": [
+      8,
+      6,
+      7,
+      3,
+      1,
+      2,
+      4,
+      5
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Maureen McCormick",
     "voting_rule": "percent",
@@ -11178,6 +13401,15 @@
       3,
       6
     ],
+    "placements": [
+      6,
+      7,
+      3,
+      1,
+      2,
+      4,
+      5
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Ryan Lochte",
     "voting_rule": "percent",
@@ -11220,6 +13452,14 @@
       1,
       3
     ],
+    "placements": [
+      6,
+      3,
+      1,
+      2,
+      4,
+      5
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Marilu Henner",
     "voting_rule": "percent",
@@ -11258,6 +13498,13 @@
       4,
       1
     ],
+    "placements": [
+      3,
+      1,
+      2,
+      4,
+      5
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Terra Jole",
     "voting_rule": "percent",
@@ -11287,6 +13534,12 @@
       0.2332976924558098
     ],
     "judge_ranks": [
+      3,
+      1,
+      2,
+      4
+    ],
+    "placements": [
       3,
       1,
       2,
@@ -11358,6 +13611,20 @@
       6,
       7
     ],
+    "placements": [
+      11,
+      10,
+      8,
+      7,
+      5,
+      4,
+      2,
+      1,
+      12,
+      9,
+      3,
+      6
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -11424,6 +13691,20 @@
       1,
       9
     ],
+    "placements": [
+      11,
+      10,
+      8,
+      7,
+      5,
+      4,
+      2,
+      1,
+      12,
+      9,
+      3,
+      6
+    ],
     "eliminated_idx": 8,
     "eliminated_name": "Chris Kattan",
     "voting_rule": "percent",
@@ -11486,6 +13767,19 @@
       1,
       7
     ],
+    "placements": [
+      11,
+      10,
+      8,
+      7,
+      5,
+      4,
+      2,
+      1,
+      9,
+      3,
+      6
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Charo",
     "voting_rule": "percent",
@@ -11544,6 +13838,18 @@
       5,
       8
     ],
+    "placements": [
+      10,
+      8,
+      7,
+      5,
+      4,
+      2,
+      1,
+      9,
+      3,
+      6
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Mr. T",
     "voting_rule": "percent",
@@ -11598,6 +13904,17 @@
       1,
       4
     ],
+    "placements": [
+      8,
+      7,
+      5,
+      4,
+      2,
+      1,
+      9,
+      3,
+      6
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Erika Jayne",
     "voting_rule": "percent",
@@ -11648,6 +13965,16 @@
       2,
       8
     ],
+    "placements": [
+      8,
+      7,
+      5,
+      4,
+      2,
+      1,
+      3,
+      6
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Heather Morris",
     "voting_rule": "percent",
@@ -11694,6 +14021,15 @@
       1,
       5
     ],
+    "placements": [
+      7,
+      5,
+      4,
+      2,
+      1,
+      3,
+      6
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Nancy Kerrigan",
     "voting_rule": "percent",
@@ -11732,6 +14068,13 @@
       2,
       1
     ],
+    "placements": [
+      5,
+      4,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Bonner Bolton",
     "voting_rule": "percent",
@@ -11766,6 +14109,12 @@
       2,
       3
     ],
+    "placements": [
+      4,
+      2,
+      1,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Simone Biles",
     "voting_rule": "percent",
@@ -11795,6 +14144,11 @@
       3,
       1,
       2
+    ],
+    "placements": [
+      2,
+      1,
+      3
     ],
     "eliminated_idx": 2,
     "eliminated_name": "Normani",
@@ -11866,6 +14220,21 @@
       11,
       3
     ],
+    "placements": [
+      10,
+      3,
+      1,
+      11,
+      8,
+      6,
+      5,
+      13,
+      2,
+      12,
+      9,
+      4,
+      7
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "percent",
@@ -11936,6 +14305,21 @@
       7,
       3
     ],
+    "placements": [
+      10,
+      3,
+      1,
+      11,
+      8,
+      6,
+      5,
+      13,
+      2,
+      12,
+      9,
+      4,
+      7
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Barbara Corcoran",
     "voting_rule": "percent",
@@ -11997,6 +14381,19 @@
       6,
       3,
       3
+    ],
+    "placements": [
+      10,
+      3,
+      1,
+      11,
+      8,
+      6,
+      5,
+      2,
+      9,
+      4,
+      7
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -12060,6 +14457,19 @@
       4,
       4
     ],
+    "placements": [
+      10,
+      3,
+      1,
+      11,
+      8,
+      6,
+      5,
+      2,
+      9,
+      4,
+      7
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Derek Fisher",
     "voting_rule": "percent",
@@ -12118,6 +14528,18 @@
       6,
       8
     ],
+    "placements": [
+      10,
+      3,
+      1,
+      8,
+      6,
+      5,
+      2,
+      9,
+      4,
+      7
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Sasha Pieterse",
     "voting_rule": "percent",
@@ -12172,6 +14594,17 @@
       8,
       4
     ],
+    "placements": [
+      3,
+      1,
+      8,
+      6,
+      5,
+      2,
+      9,
+      4,
+      7
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Nick Lachey",
     "voting_rule": "percent",
@@ -12222,6 +14655,16 @@
       2,
       4
     ],
+    "placements": [
+      3,
+      1,
+      8,
+      6,
+      5,
+      2,
+      4,
+      7
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Nikki Bella",
     "voting_rule": "percent",
@@ -12264,6 +14707,14 @@
       2,
       6
     ],
+    "placements": [
+      3,
+      1,
+      6,
+      5,
+      2,
+      4
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Terrell Owens",
     "voting_rule": "percent",
@@ -12302,6 +14753,13 @@
       2,
       5
     ],
+    "placements": [
+      3,
+      1,
+      5,
+      2,
+      4
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Victoria Arlen",
     "voting_rule": "percent",
@@ -12334,6 +14792,12 @@
       3,
       1,
       1,
+      4
+    ],
+    "placements": [
+      3,
+      1,
+      2,
       4
     ],
     "eliminated_idx": 3,
@@ -12394,6 +14858,18 @@
       1,
       1
     ],
+    "placements": [
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Jamie Anderson",
     "voting_rule": "percent",
@@ -12444,6 +14920,16 @@
       6,
       1
     ],
+    "placements": [
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Kareem Abdul-Jabbar",
     "voting_rule": "percent",
@@ -12486,6 +14972,14 @@
       2,
       1
     ],
+    "placements": [
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Jennie Finch Daigle",
     "voting_rule": "percent",
@@ -12512,6 +15006,11 @@
       0.3391812865497076
     ],
     "judge_ranks": [
+      3,
+      2,
+      1
+    ],
+    "placements": [
       3,
       2,
       1
@@ -12586,6 +15085,21 @@
       3,
       13
     ],
+    "placements": [
+      5,
+      3,
+      11,
+      8,
+      2,
+      12,
+      9,
+      7,
+      13,
+      1,
+      10,
+      4,
+      6
+    ],
     "eliminated_idx": 8,
     "eliminated_name": "Nikki Glaser",
     "voting_rule": "percent",
@@ -12652,6 +15166,20 @@
       4,
       12
     ],
+    "placements": [
+      5,
+      3,
+      11,
+      8,
+      2,
+      12,
+      9,
+      7,
+      1,
+      10,
+      4,
+      6
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Danelle Umstead",
     "voting_rule": "percent",
@@ -12714,6 +15242,19 @@
       5,
       11
     ],
+    "placements": [
+      5,
+      3,
+      11,
+      8,
+      2,
+      9,
+      7,
+      1,
+      10,
+      4,
+      6
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Nancy McKeon",
     "voting_rule": "percent",
@@ -12772,6 +15313,18 @@
       4,
       10
     ],
+    "placements": [
+      5,
+      3,
+      8,
+      2,
+      9,
+      7,
+      1,
+      10,
+      4,
+      6
+    ],
     "eliminated_idx": 7,
     "eliminated_name": "Tinashe",
     "voting_rule": "percent",
@@ -12825,6 +15378,17 @@
       8,
       1,
       9
+    ],
+    "placements": [
+      5,
+      3,
+      8,
+      2,
+      9,
+      7,
+      1,
+      4,
+      6
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -12880,6 +15444,17 @@
       4,
       7
     ],
+    "placements": [
+      5,
+      3,
+      8,
+      2,
+      9,
+      7,
+      1,
+      4,
+      6
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Mary Lou Retton",
     "voting_rule": "percent",
@@ -12930,6 +15505,16 @@
       4,
       8
     ],
+    "placements": [
+      5,
+      3,
+      8,
+      2,
+      7,
+      1,
+      4,
+      6
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "John Schneider",
     "voting_rule": "percent",
@@ -12972,6 +15557,14 @@
       2,
       5
     ],
+    "placements": [
+      5,
+      3,
+      2,
+      1,
+      4,
+      6
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Juan Pablo Di Pace",
     "voting_rule": "percent",
@@ -13005,6 +15598,12 @@
       1,
       4,
       3
+    ],
+    "placements": [
+      3,
+      2,
+      1,
+      4
     ],
     "eliminated_idx": 3,
     "eliminated_name": "Alexis Ren",
@@ -13072,6 +15671,20 @@
       5,
       2
     ],
+    "placements": [
+      7,
+      5,
+      2,
+      11,
+      10,
+      9,
+      6,
+      12,
+      4,
+      3,
+      8,
+      1
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "rank",
@@ -13138,6 +15751,20 @@
       6,
       1
     ],
+    "placements": [
+      7,
+      5,
+      2,
+      11,
+      10,
+      9,
+      6,
+      12,
+      4,
+      3,
+      8,
+      1
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Ray Lewis",
     "voting_rule": "rank",
@@ -13195,6 +15822,18 @@
       1,
       8,
       5
+    ],
+    "placements": [
+      7,
+      5,
+      2,
+      10,
+      9,
+      6,
+      4,
+      3,
+      8,
+      1
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -13254,6 +15893,18 @@
       6,
       1
     ],
+    "placements": [
+      7,
+      5,
+      2,
+      10,
+      9,
+      6,
+      4,
+      3,
+      8,
+      1
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Lamar Odom",
     "voting_rule": "rank",
@@ -13307,6 +15958,17 @@
       1,
       8,
       4
+    ],
+    "placements": [
+      7,
+      5,
+      2,
+      9,
+      6,
+      4,
+      3,
+      8,
+      1
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -13362,6 +16024,17 @@
       6,
       8
     ],
+    "placements": [
+      7,
+      5,
+      2,
+      9,
+      6,
+      4,
+      3,
+      8,
+      1
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Sailor Brinkley-Cook",
     "voting_rule": "rank",
@@ -13412,6 +16085,16 @@
       6,
       4
     ],
+    "placements": [
+      7,
+      5,
+      2,
+      6,
+      4,
+      3,
+      8,
+      1
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Karamo Brown",
     "voting_rule": "rank",
@@ -13458,6 +16141,15 @@
       3,
       2
     ],
+    "placements": [
+      7,
+      5,
+      2,
+      6,
+      4,
+      3,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Kate Flannery",
     "voting_rule": "rank",
@@ -13500,6 +16192,14 @@
       1,
       4
     ],
+    "placements": [
+      5,
+      2,
+      6,
+      4,
+      3,
+      1
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Sean Spicer",
     "voting_rule": "rank",
@@ -13538,6 +16238,13 @@
       1,
       3
     ],
+    "placements": [
+      5,
+      2,
+      4,
+      3,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "James Van Der Beek",
     "voting_rule": "rank",
@@ -13571,6 +16278,12 @@
       4,
       1,
       3
+    ],
+    "placements": [
+      2,
+      4,
+      3,
+      1
     ],
     "eliminated_idx": 1,
     "eliminated_name": "Lauren Alaina",
@@ -13650,6 +16363,23 @@
       5,
       6
     ],
+    "placements": [
+      13,
+      12,
+      8,
+      5,
+      4,
+      15,
+      11,
+      6,
+      2,
+      7,
+      3,
+      1,
+      14,
+      10,
+      9
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "rank",
@@ -13728,6 +16458,23 @@
       12,
       6
     ],
+    "placements": [
+      13,
+      12,
+      8,
+      5,
+      4,
+      15,
+      11,
+      6,
+      2,
+      7,
+      3,
+      1,
+      14,
+      10,
+      9
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Charles Oakley",
     "voting_rule": "rank",
@@ -13802,6 +16549,22 @@
       7,
       4
     ],
+    "placements": [
+      13,
+      12,
+      8,
+      5,
+      4,
+      11,
+      6,
+      2,
+      7,
+      3,
+      1,
+      14,
+      10,
+      9
+    ],
     "eliminated_idx": 11,
     "eliminated_name": "Carole Baskin",
     "voting_rule": "rank",
@@ -13872,6 +16635,21 @@
       3,
       10
     ],
+    "placements": [
+      13,
+      12,
+      8,
+      5,
+      4,
+      11,
+      6,
+      2,
+      7,
+      3,
+      1,
+      10,
+      9
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Anne Heche",
     "voting_rule": "rank",
@@ -13938,6 +16716,20 @@
       3,
       5
     ],
+    "placements": [
+      12,
+      8,
+      5,
+      4,
+      11,
+      6,
+      2,
+      7,
+      3,
+      1,
+      10,
+      9
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Jesse Metcalfe",
     "voting_rule": "rank",
@@ -14000,6 +16792,19 @@
       1,
       6
     ],
+    "placements": [
+      8,
+      5,
+      4,
+      11,
+      6,
+      2,
+      7,
+      3,
+      1,
+      10,
+      9
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Veron Davis",
     "voting_rule": "rank",
@@ -14058,6 +16863,18 @@
       10,
       8
     ],
+    "placements": [
+      8,
+      5,
+      4,
+      6,
+      2,
+      7,
+      3,
+      1,
+      10,
+      9
+    ],
     "eliminated_idx": 8,
     "eliminated_name": "Monica Aldama",
     "voting_rule": "rank",
@@ -14108,6 +16925,16 @@
       8,
       4
     ],
+    "placements": [
+      8,
+      5,
+      4,
+      6,
+      2,
+      7,
+      3,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Chrishell Stause",
     "voting_rule": "rank",
@@ -14154,6 +16981,15 @@
       7,
       1
     ],
+    "placements": [
+      5,
+      4,
+      6,
+      2,
+      7,
+      3,
+      1
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "AJ McLean",
     "voting_rule": "rank",
@@ -14196,6 +17032,14 @@
       6,
       1
     ],
+    "placements": [
+      5,
+      4,
+      6,
+      2,
+      3,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Skai Jackson",
     "voting_rule": "rank",
@@ -14228,6 +17072,12 @@
       1,
       1,
       4,
+      1
+    ],
+    "placements": [
+      4,
+      2,
+      3,
       1
     ],
     "eliminated_idx": 0,
@@ -14308,6 +17158,23 @@
       5,
       2
     ],
+    "placements": [
+      15,
+      13,
+      6,
+      12,
+      9,
+      5,
+      1,
+      3,
+      11,
+      7,
+      8,
+      2,
+      14,
+      10,
+      4
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "rank",
@@ -14386,6 +17253,23 @@
       10,
       1
     ],
+    "placements": [
+      15,
+      13,
+      6,
+      12,
+      9,
+      5,
+      1,
+      3,
+      11,
+      7,
+      8,
+      2,
+      14,
+      10,
+      4
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Martin Kove",
     "voting_rule": "rank",
@@ -14460,6 +17344,22 @@
       7,
       1
     ],
+    "placements": [
+      13,
+      6,
+      12,
+      9,
+      5,
+      1,
+      3,
+      11,
+      7,
+      8,
+      2,
+      14,
+      10,
+      4
+    ],
     "eliminated_idx": 11,
     "eliminated_name": "Christine Chiu",
     "voting_rule": "rank",
@@ -14530,6 +17430,21 @@
       10,
       4
     ],
+    "placements": [
+      13,
+      6,
+      12,
+      9,
+      5,
+      1,
+      3,
+      11,
+      7,
+      8,
+      2,
+      10,
+      4
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Brian Austin Green",
     "voting_rule": "rank",
@@ -14592,6 +17507,19 @@
       3,
       2
     ],
+    "placements": [
+      6,
+      9,
+      5,
+      1,
+      3,
+      11,
+      7,
+      8,
+      2,
+      10,
+      4
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Melanie C",
     "voting_rule": "rank",
@@ -14650,6 +17578,18 @@
       10,
       3
     ],
+    "placements": [
+      6,
+      9,
+      5,
+      1,
+      3,
+      7,
+      8,
+      2,
+      10,
+      4
+    ],
     "eliminated_idx": 8,
     "eliminated_name": "Kenya Moore",
     "voting_rule": "rank",
@@ -14704,6 +17644,17 @@
       2,
       6
     ],
+    "placements": [
+      6,
+      9,
+      5,
+      1,
+      3,
+      7,
+      8,
+      2,
+      4
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Mike \"The Miz\" Mizanin",
     "voting_rule": "rank",
@@ -14754,6 +17705,16 @@
       4,
       1
     ],
+    "placements": [
+      6,
+      5,
+      1,
+      3,
+      7,
+      8,
+      2,
+      4
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Jimmie Allen",
     "voting_rule": "rank",
@@ -14796,6 +17757,14 @@
       1,
       2
     ],
+    "placements": [
+      6,
+      5,
+      1,
+      3,
+      2,
+      4
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Melora Hardin",
     "voting_rule": "rank",
@@ -14829,6 +17798,12 @@
       4,
       1,
       3
+    ],
+    "placements": [
+      1,
+      3,
+      2,
+      4
     ],
     "eliminated_idx": 3,
     "eliminated_name": "Amanda Kloots",
@@ -14912,6 +17887,24 @@
       3,
       3
     ],
+    "placements": [
+      16,
+      14,
+      12,
+      11,
+      6,
+      5,
+      3,
+      13,
+      10,
+      9,
+      8,
+      1,
+      15,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Jason Lewis",
     "voting_rule": "rank",
@@ -14990,6 +17983,23 @@
       6,
       1
     ],
+    "placements": [
+      14,
+      12,
+      11,
+      6,
+      5,
+      3,
+      13,
+      10,
+      9,
+      8,
+      1,
+      15,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 11,
     "eliminated_name": "Teresa Giudice",
     "voting_rule": "rank",
@@ -15064,6 +18074,22 @@
       6,
       1
     ],
+    "placements": [
+      14,
+      12,
+      11,
+      6,
+      5,
+      3,
+      13,
+      10,
+      9,
+      8,
+      1,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Cheryl Ladd",
     "voting_rule": "rank",
@@ -15134,6 +18160,21 @@
       6,
       1
     ],
+    "placements": [
+      12,
+      11,
+      6,
+      5,
+      3,
+      13,
+      10,
+      9,
+      8,
+      1,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Sam Champion",
     "voting_rule": "rank",
@@ -15200,6 +18241,20 @@
       6,
       2
     ],
+    "placements": [
+      12,
+      11,
+      6,
+      5,
+      3,
+      10,
+      9,
+      8,
+      1,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Selma Blair",
     "voting_rule": "rank",
@@ -15258,6 +18313,18 @@
       3,
       2
     ],
+    "placements": [
+      6,
+      5,
+      3,
+      10,
+      9,
+      8,
+      1,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Jessie James Decker",
     "voting_rule": "rank",
@@ -15312,6 +18379,17 @@
       4,
       6
     ],
+    "placements": [
+      6,
+      5,
+      3,
+      9,
+      8,
+      1,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Jordin Sparks",
     "voting_rule": "rank",
@@ -15362,6 +18440,16 @@
       3,
       4
     ],
+    "placements": [
+      6,
+      5,
+      3,
+      8,
+      1,
+      7,
+      4,
+      2
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Heidi D'Amelio",
     "voting_rule": "rank",
@@ -15404,6 +18492,14 @@
       3,
       1
     ],
+    "placements": [
+      6,
+      5,
+      3,
+      1,
+      4,
+      2
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Trevor Donovan",
     "voting_rule": "rank",
@@ -15437,6 +18533,12 @@
       1,
       3,
       1
+    ],
+    "placements": [
+      3,
+      1,
+      4,
+      2
     ],
     "eliminated_idx": 2,
     "eliminated_name": "Shangela",
@@ -15512,6 +18614,22 @@
       1,
       2
     ],
+    "placements": [
+      13,
+      10,
+      7,
+      5,
+      1,
+      11,
+      14,
+      12,
+      2,
+      8,
+      6,
+      9,
+      4,
+      3
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Matt Walsh",
     "voting_rule": "rank",
@@ -15582,6 +18700,21 @@
       3,
       5
     ],
+    "placements": [
+      13,
+      10,
+      7,
+      5,
+      1,
+      11,
+      12,
+      2,
+      8,
+      6,
+      9,
+      4,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Jamie Lynn Spears",
     "voting_rule": "rank",
@@ -15648,6 +18781,20 @@
       3,
       1
     ],
+    "placements": [
+      10,
+      7,
+      5,
+      1,
+      11,
+      12,
+      2,
+      8,
+      6,
+      9,
+      4,
+      3
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Tyson Beckford",
     "voting_rule": "rank",
@@ -15710,6 +18857,19 @@
       3,
       2
     ],
+    "placements": [
+      10,
+      7,
+      5,
+      1,
+      11,
+      2,
+      8,
+      6,
+      9,
+      4,
+      3
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Adrian Peterson",
     "voting_rule": "rank",
@@ -15768,6 +18928,18 @@
       1,
       4
     ],
+    "placements": [
+      10,
+      7,
+      5,
+      1,
+      2,
+      8,
+      6,
+      9,
+      4,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Mira Sorvino",
     "voting_rule": "rank",
@@ -15822,6 +18994,17 @@
       4,
       2
     ],
+    "placements": [
+      7,
+      5,
+      1,
+      2,
+      8,
+      6,
+      9,
+      4,
+      3
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Mauricio Umansky",
     "voting_rule": "rank",
@@ -15872,6 +19055,16 @@
       4,
       1
     ],
+    "placements": [
+      7,
+      5,
+      1,
+      2,
+      8,
+      6,
+      4,
+      3
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Lele Pons",
     "voting_rule": "rank",
@@ -15918,6 +19111,15 @@
       3,
       1
     ],
+    "placements": [
+      7,
+      5,
+      1,
+      2,
+      6,
+      4,
+      3
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Barry Williams",
     "voting_rule": "rank",
@@ -15960,6 +19162,14 @@
       3,
       4
     ],
+    "placements": [
+      5,
+      1,
+      2,
+      6,
+      4,
+      3
+    ],
     "eliminated_idx": 3,
     "eliminated_name": "Harry Jowsey",
     "voting_rule": "rank",
@@ -15998,6 +19208,13 @@
       2,
       3
     ],
+    "placements": [
+      5,
+      1,
+      2,
+      4,
+      3
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "rank",
@@ -16034,6 +19251,13 @@
       1,
       1,
       3,
+      3
+    ],
+    "placements": [
+      5,
+      1,
+      2,
+      4,
       3
     ],
     "eliminated_idx": 0,
@@ -16106,6 +19330,21 @@
       6,
       3
     ],
+    "placements": [
+      12,
+      10,
+      10,
+      3,
+      6,
+      5,
+      4,
+      2,
+      12,
+      9,
+      8,
+      7,
+      1
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "rank",
@@ -16176,6 +19415,21 @@
       9,
       2
     ],
+    "placements": [
+      12,
+      10,
+      10,
+      3,
+      6,
+      5,
+      4,
+      2,
+      12,
+      9,
+      8,
+      7,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Tori Spelling",
     "voting_rule": "rank",
@@ -16238,6 +19492,19 @@
       3,
       1
     ],
+    "placements": [
+      10,
+      10,
+      3,
+      6,
+      5,
+      4,
+      2,
+      9,
+      8,
+      7,
+      1
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Eric Roberts",
     "voting_rule": "rank",
@@ -16292,6 +19559,17 @@
       4,
       1
     ],
+    "placements": [
+      3,
+      6,
+      5,
+      4,
+      2,
+      9,
+      8,
+      7,
+      1
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Brooks Nader",
     "voting_rule": "rank",
@@ -16342,6 +19620,16 @@
       4,
       2
     ],
+    "placements": [
+      3,
+      6,
+      5,
+      4,
+      2,
+      8,
+      7,
+      1
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Phaedra Parks",
     "voting_rule": "rank",
@@ -16388,6 +19676,15 @@
       3,
       1
     ],
+    "placements": [
+      3,
+      6,
+      5,
+      4,
+      2,
+      7,
+      1
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Jenn Tran",
     "voting_rule": "rank",
@@ -16430,6 +19727,14 @@
       4,
       2
     ],
+    "placements": [
+      3,
+      6,
+      5,
+      4,
+      2,
+      1
+    ],
     "eliminated_idx": 1,
     "eliminated_name": "Dwight Howard ",
     "voting_rule": "rank",
@@ -16466,6 +19771,13 @@
       4,
       5,
       3,
+      1
+    ],
+    "placements": [
+      3,
+      5,
+      4,
+      2,
       1
     ],
     "eliminated_idx": null,
@@ -16505,6 +19817,13 @@
       2,
       4,
       2
+    ],
+    "placements": [
+      3,
+      5,
+      4,
+      2,
+      1
     ],
     "eliminated_idx": 1,
     "eliminated_name": "Danny Amendola",
@@ -16580,6 +19899,22 @@
       1,
       9
     ],
+    "placements": [
+      13,
+      8,
+      5,
+      13,
+      3,
+      7,
+      1,
+      11,
+      12,
+      10,
+      2,
+      9,
+      6,
+      4
+    ],
     "eliminated_idx": null,
     "eliminated_name": null,
     "voting_rule": "rank",
@@ -16654,6 +19989,22 @@
       1,
       9
     ],
+    "placements": [
+      13,
+      8,
+      5,
+      13,
+      3,
+      7,
+      1,
+      11,
+      12,
+      10,
+      2,
+      9,
+      6,
+      4
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Corey Feldman",
     "voting_rule": "rank",
@@ -16720,6 +20071,20 @@
       1,
       3
     ],
+    "placements": [
+      8,
+      5,
+      3,
+      7,
+      1,
+      11,
+      12,
+      10,
+      2,
+      9,
+      6,
+      4
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Lauren Jauregui",
     "voting_rule": "rank",
@@ -16782,6 +20147,19 @@
       1,
       5
     ],
+    "placements": [
+      8,
+      5,
+      3,
+      7,
+      1,
+      11,
+      10,
+      2,
+      9,
+      6,
+      4
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Hilaria Baldwin",
     "voting_rule": "rank",
@@ -16839,6 +20217,18 @@
       8,
       4,
       1
+    ],
+    "placements": [
+      8,
+      5,
+      3,
+      7,
+      1,
+      10,
+      2,
+      9,
+      6,
+      4
     ],
     "eliminated_idx": null,
     "eliminated_name": null,
@@ -16898,6 +20288,18 @@
       1,
       7
     ],
+    "placements": [
+      8,
+      5,
+      3,
+      7,
+      1,
+      10,
+      2,
+      9,
+      6,
+      4
+    ],
     "eliminated_idx": 5,
     "eliminated_name": "Scott Hoying",
     "voting_rule": "rank",
@@ -16952,6 +20354,17 @@
       2,
       4
     ],
+    "placements": [
+      8,
+      5,
+      3,
+      7,
+      1,
+      2,
+      9,
+      6,
+      4
+    ],
     "eliminated_idx": 6,
     "eliminated_name": "Jen Affleck",
     "voting_rule": "rank",
@@ -17002,6 +20415,16 @@
       1,
       4
     ],
+    "placements": [
+      8,
+      5,
+      3,
+      7,
+      1,
+      2,
+      6,
+      4
+    ],
     "eliminated_idx": 0,
     "eliminated_name": "Danielle Fishel",
     "voting_rule": "rank",
@@ -17048,6 +20471,15 @@
       1,
       1
     ],
+    "placements": [
+      5,
+      3,
+      7,
+      1,
+      2,
+      6,
+      4
+    ],
     "eliminated_idx": 2,
     "eliminated_name": "Andy Richter",
     "voting_rule": "rank",
@@ -17090,6 +20522,14 @@
       2,
       6
     ],
+    "placements": [
+      5,
+      3,
+      1,
+      2,
+      6,
+      4
+    ],
     "eliminated_idx": 4,
     "eliminated_name": "Whitney Leavitt",
     "voting_rule": "rank",
@@ -17126,6 +20566,13 @@
       2,
       2,
       1,
+      4
+    ],
+    "placements": [
+      5,
+      3,
+      1,
+      2,
       4
     ],
     "eliminated_idx": 0,
