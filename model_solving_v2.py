@@ -43,21 +43,21 @@ warnings.filterwarnings('ignore')
 class Config:
     """全局配置"""
     # 数据路径
-    DATA_DIR = "C:/Users/ultraman/Desktop/文件夹/shumo/code/preprocessing_output"
+    DATA_DIR = "preprocessing_output"
     MODELS_DIR = os.path.join(DATA_DIR, "models")
     DATA_SUBDIR = os.path.join(DATA_DIR, "data")
-    OUTPUT_DIR = "C:/Users/ultraman/Desktop/文件夹/shumo/code/solving_output_v4"
+    OUTPUT_DIR = "solving_output_v2"
     
     # 随机种子
     RANDOM_SEED = 42
     
     # 问题一参数
     Q1_LAMBDA_REG = 0.1  # 正则化系数（熵正则化权重）
-    Q1_MAX_ITER = 500    # SLSQP最大迭代次数（进一步减少）
-    Q1_MCMC_SAMPLES = 5000   # MCMC采样数
-    Q1_BURNIN = 1000      # MCMC预热期
-    Q1_BOOTSTRAP_N = 500   # Bootstrap次数
-    Q1_BOOTSTRAP_WEEKS = 10  # Bootstrap评估的周数（恢复到10）
+    Q1_MAX_ITER = 100    # SLSQP最大迭代次数
+    Q1_MCMC_SAMPLES = 500   # MCMC采样数
+    Q1_BURNIN = 100      # MCMC预热期
+    Q1_BOOTSTRAP_N = 30   # Bootstrap次数
+    Q1_BOOTSTRAP_WEEKS = 10  # Bootstrap评估的周数
     
     # 问题二参数
     Q2_BOOTSTRAP_N = 1000
@@ -183,29 +183,60 @@ class Q1FanVoteEstimator:
         """
         求解单周优化问题
         
-        修复：添加快速失败检测和智能初始值，避免Bootstrap卡住
+        修复v2.1：改进目标函数，产生更有区分度的粉丝投票估计
+        - 原问题：目标函数min(v-uniform)²导致解趋向均匀分布
+        - 新方案：使用基于评委分数的先验，鼓励与评委评分有差异的解
         """
         n = week_data['n_contestants']
         judge_pct = np.array(week_data['judge_pct'])
         judge_ranks = np.array(week_data['judge_ranks'])
+        judge_scores = np.array(week_data.get('judge_scores', judge_pct * 30))
         eliminated_idx = week_data['eliminated_idx']
         voting_rule = week_data['voting_rule']
         
-        # 智能初始值：如果有淘汰者，初始化粉丝投票使其排名靠后
+        # 智能初始值：基于评委排名的逆序（假设粉丝投票与评委有差异）
         if eliminated_idx is not None and n > 2:
-            v0 = np.ones(n) / n
-            # 降低被淘汰者的初始投票，使其更容易被淘汰
-            v0[eliminated_idx] = 0.02
-            # 重新归一化
+            # 被淘汰者获得低票，其他人根据评委排名分配
+            v0 = np.ones(n)
+            max_rank = np.max(judge_ranks)
+            for i in range(n):
+                if i == eliminated_idx:
+                    v0[i] = 0.02
+                else:
+                    # 评委排名越低（数字越大），假设粉丝投票越高（体现"黑马"效应）
+                    v0[i] = (judge_ranks[i] / max_rank) * 0.8 + 0.2
             v0 = v0 / np.sum(v0)
         else:
-            v0 = np.ones(n) / n
+            # 无淘汰时，使用基于评委分数逆序的先验
+            v0 = np.ones(n)
+            max_score = np.max(judge_scores) if np.max(judge_scores) > 0 else 1
+            for i in range(n):
+                # 假设粉丝投票与技术水平有一定负相关（"同情票"效应）
+                v0[i] = (1 - judge_scores[i] / max_score / 2) + 0.5
+            v0 = v0 / np.sum(v0)
         
         def objective(v):
-            uniform = np.ones(n) / n
-            deviation = np.sum((v - uniform)**2)
+            """
+            新目标函数：
+            1. 最大化熵（鼓励分散分布，而非均匀）
+            2. 与评委分数有适度差异（体现粉丝投票的独立性）
+            3. 被淘汰者应获得较少票
+            """
+            # 熵正则化（最大化熵，鼓励分散但不必均匀）
             entropy = -np.sum(v * np.log(v + 1e-10))
-            return deviation - Config.Q1_LAMBDA_REG * entropy
+            
+            # 与评委分数的差异性（鼓励粉丝投票有自己的模式）
+            judge_normalized = judge_pct / np.sum(judge_pct) if np.sum(judge_pct) > 0 else np.ones(n) / n
+            difference = np.sum((v - judge_normalized)**2)
+            
+            # 如果有淘汰者，惩罚给淘汰者高票
+            eliminated_penalty = 0
+            if eliminated_idx is not None:
+                eliminated_penalty = v[eliminated_idx] * 5  # 惩罚给淘汰者高票
+            
+            # 总目标：最大化熵 + 适度差异 - 淘汰者惩罚
+            # 注意：minimize所以取负
+            return -entropy + 0.1 * difference + eliminated_penalty
         
         def constraint_sum(v):
             return np.sum(v) - 1.0

@@ -18,7 +18,7 @@ import os
 
 # 输出目录
 OUTPUT_DIR = "visualization_output"
-DATA_DIR = "solving_output"
+DATA_DIR = "solving_output_v2"
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 

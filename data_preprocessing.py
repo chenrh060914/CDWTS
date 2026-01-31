@@ -343,6 +343,17 @@ class DWTSDataPreprocessor:
                                 eliminated_idx = i
                                 eliminated_name = row['celebrity_name']
                                 break
+                else:
+                    # 决赛周：最后一轮未拿冠军的相当于淘汰了
+                    # 找到placement不是1的选手作为"淘汰者"
+                    # 如果有多个非冠军，取placement最大（排名最差）的
+                    worst_placement = 0
+                    for i, (idx, row) in enumerate(active_df.iterrows()):
+                        placement = row.get('placement', 0)
+                        if placement > 1 and placement > worst_placement:
+                            worst_placement = placement
+                            eliminated_idx = i
+                            eliminated_name = row['celebrity_name']
                 
                 # 存储数据
                 week_data[(season, week)] = {
