@@ -1,0 +1,6 @@
+name,season,placement,avg_score,voting_rule,is_controversial,controversy_type
+Jerry Rice,2,2,0,rank,True,低分晋级深
+Billy Ray Cyrus,4,5,0,percent,False,
+Bristol Palin,11,3,0,percent,False,
+Bristol Palin,15,9,0,percent,False,
+Bobby Bones,27,1,0,percent,True,低分晋级深

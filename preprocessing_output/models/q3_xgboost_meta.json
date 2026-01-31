@@ -1,0 +1,21 @@
+{
+  "numerical_features": [
+    "age",
+    "season",
+    "avg_score",
+    "score_trend",
+    "partner_win_rate",
+    "industry_avg_placement"
+  ],
+  "categorical_features": [
+    "voting_phase",
+    "partner_id",
+    "judge_count",
+    "industry_encoded",
+    "is_usa"
+  ],
+  "target_binary": "top3 (placement <= 3)",
+  "target_regression": "placement",
+  "n_samples": 421,
+  "n_features": 11
+}

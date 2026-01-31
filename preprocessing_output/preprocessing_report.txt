@@ -1,0 +1,35 @@
+
+================================================================================
+DWTS 数据预处理报告
+MCM 2026 Problem C
+================================================================================
+
+一、数据概览
+-----------
+原始数据: ./2026_MCM_Problem_C_Data.csv
+数据维度: 421 行 × 53 列
+季节范围: S1 - S34
+
+二、数据清洗结果
+---------------
+清洗后维度: 421 行 × 84 列
+新增字段: judge_count, voting_rule, voting_phase, elimination_week, 
+         last_valid_week, partner_id, avg_score_all_weeks, score_trend
+
+三、投票规则分布
+---------------
+排名制(S1-2, S28-34): 115 条
+百分比制(S3-27): 306 条
+
+四、输出文件
+-----------
+详见 preprocessing_output 目录
+
+五、各模型数据说明
+-----------------
+问题一（约束优化）: models/q1_constraint_optimization_data.json
+问题一（贝叶斯MCMC）: models/q1_bayesian_mcmc_data.json
+问题二（Kendall τ）: models/q2_kendall_bootstrap_data.json
+问题三（LMEM）: data/q3_lmem_features.csv
+问题三（XGBoost）: data/q3_xgboost_features.csv
+问题四（NSGA-II）: models/q4_nsga2_data.json

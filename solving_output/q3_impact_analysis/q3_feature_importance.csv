@@ -1,0 +1,36 @@
+feature,importance
+last_week,0.7950782111342788
+avg_score,0.05479392686143244
+season_scaled,0.039374734247672134
+season_group,0.029464703015260208
+season,0.029381581530129906
+season.1,0.021704071644191657
+age_scaled,0.006551699899935532
+age,0.006208793472545484
+voting_phase,0.0055051470869544586
+partner_id,0.0054293425682941454
+industry_Athlete,0.002179027224522338
+industry_Radio Personality,0.0020222527143866163
+industry_Actor/Actress,0.0006800925512941167
+industry_Politician,0.0006624103104182157
+industry_Conservationist,0.00030279099350980984
+industry_Tv Personality,0.00027984139491337784
+industry_Model,0.0001231770300226349
+industry_Racing Driver,0.00011968909617123933
+industry_Social Media Personality,0.00010299073636161989
+industry_Magician,3.55164877052448e-05
+industry_Fitness Instructor,0.0
+industry_Fashion Designer,0.0
+industry_Entrepreneur,0.0
+industry_Con Artist,0.0
+industry_Comedian,0.0
+industry_Beauty Pagent,0.0
+industry_Astronaut,0.0
+industry_Journalist,0.0
+industry_Producer,0.0
+industry_Musician,0.0
+industry_Motivational Speaker,0.0
+industry_Military,0.0
+industry_News Anchor,0.0
+industry_Singer/Rapper,0.0
+industry_Sports Broadcaster,0.0

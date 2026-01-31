@@ -1,0 +1,44 @@
+{
+  "fixed_effects": [
+    "age_scaled",
+    "season_scaled",
+    "voting_phase",
+    "industry_Actor/Actress",
+    "industry_Astronaut",
+    "industry_Athlete",
+    "industry_Beauty Pagent",
+    "industry_Comedian",
+    "industry_Con Artist",
+    "industry_Conservationist",
+    "industry_Entrepreneur",
+    "industry_Fashion Designer",
+    "industry_Fitness Instructor",
+    "industry_Journalist",
+    "industry_Magician",
+    "industry_Military",
+    "industry_Model",
+    "industry_Motivational Speaker",
+    "industry_Musician",
+    "industry_News Anchor",
+    "industry_Politician",
+    "industry_Producer",
+    "industry_Racing Driver",
+    "industry_Radio Personality",
+    "industry_Singer/Rapper",
+    "industry_Social Media Personality",
+    "industry_Sports Broadcaster",
+    "industry_Tv Personality"
+  ],
+  "random_effects": [
+    "partner_id",
+    "season_group"
+  ],
+  "target_variables": [
+    "placement",
+    "avg_score",
+    "last_week"
+  ],
+  "n_samples": 421,
+  "n_partners": 60,
+  "n_industries": 25
+}

@@ -1,0 +1,104 @@
+{
+  "method_comparison": {
+    "rank_method": {
+      "n_seasons": 9,
+      "seasons": [
+        1,
+        2,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34
+      ]
+    },
+    "percent_method": {
+      "n_seasons": 25,
+      "seasons": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ]
+    }
+  },
+  "controversy_analysis": {
+    "cases": [
+      {
+        "name": "Jerry Rice",
+        "season": 2,
+        "placement": 2,
+        "avg_score": 0,
+        "voting_rule": "rank",
+        "is_controversial": true,
+        "controversy_type": "低分晋级深"
+      },
+      {
+        "name": "Billy Ray Cyrus",
+        "season": 4,
+        "placement": 5,
+        "avg_score": 0,
+        "voting_rule": "percent",
+        "is_controversial": false,
+        "controversy_type": ""
+      },
+      {
+        "name": "Bristol Palin",
+        "season": 11,
+        "placement": 3,
+        "avg_score": 0,
+        "voting_rule": "percent",
+        "is_controversial": false,
+        "controversy_type": ""
+      },
+      {
+        "name": "Bristol Palin",
+        "season": 15,
+        "placement": 9,
+        "avg_score": 0,
+        "voting_rule": "percent",
+        "is_controversial": false,
+        "controversy_type": ""
+      },
+      {
+        "name": "Bobby Bones",
+        "season": 27,
+        "placement": 1,
+        "avg_score": 0,
+        "voting_rule": "percent",
+        "is_controversial": true,
+        "controversy_type": "低分晋级深"
+      }
+    ],
+    "n_controversial": 2
+  },
+  "conclusion": {
+    "rank_score_corr": 0,
+    "percent_score_corr": 0,
+    "more_judge_biased": "percent",
+    "interpretation": "百分比制更偏向评委评分"
+  }
+}
