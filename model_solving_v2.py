@@ -53,10 +53,11 @@ class Config:
     
     # 问题一参数
     Q1_LAMBDA_REG = 0.1  # 正则化系数（熵正则化权重）
-    Q1_MAX_ITER = 1000   # SLSQP最大迭代次数
-    Q1_MCMC_SAMPLES = 1000  # MCMC采样数（原5000，为提高运行速度减少）
-    Q1_BURNIN = 200      # MCMC预热期（原1000，相应减少）
-    Q1_BOOTSTRAP_N = 100  # Bootstrap次数（原500，为提高运行速度减少）
+    Q1_MAX_ITER = 500    # SLSQP最大迭代次数（减少以加速）
+    Q1_MCMC_SAMPLES = 500   # MCMC采样数（减少以加速）
+    Q1_BURNIN = 100      # MCMC预热期
+    Q1_BOOTSTRAP_N = 20   # Bootstrap次数（大幅减少以避免卡住）
+    Q1_BOOTSTRAP_WEEKS = 3  # Bootstrap评估的周数（减少）
     
     # 问题二参数
     Q2_BOOTSTRAP_N = 1000
@@ -104,9 +105,27 @@ def load_json(filepath: str) -> dict:
 
 def save_json(data: dict, filepath: str):
     """保存JSON文件"""
+    def convert_types(obj):
+        """递归转换numpy类型和bool为Python原生类型"""
+        if isinstance(obj, dict):
+            return {k: convert_types(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [convert_types(v) for v in obj]
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, (np.integer, np.int64, np.int32)):
+            return int(obj)
+        elif isinstance(obj, (np.floating, np.float64, np.float32)):
+            return float(obj)
+        elif isinstance(obj, np.bool_):
+            return bool(obj)
+        else:
+            return obj
+    
     try:
+        converted_data = convert_types(data)
         with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
+            json.dump(converted_data, f, indent=2, ensure_ascii=False)
         print(f"[INFO] 保存成功: {filepath}")
     except Exception as e:
         print(f"[ERROR] 保存JSON失败: {filepath}, 错误: {e}")
@@ -286,7 +305,8 @@ class Q1FanVoteEstimator:
         samples = []
         accepted = 0
         total_attempts = 0
-        max_attempts = Config.Q1_MCMC_SAMPLES * 100
+        # 减少最大尝试次数以避免卡住（原100倍改为10倍）
+        max_attempts = Config.Q1_MCMC_SAMPLES * 10
         
         while len(samples) < Config.Q1_MCMC_SAMPLES and total_attempts < max_attempts:
             v = np.random.dirichlet(alpha)
@@ -295,8 +315,9 @@ class Q1FanVoteEstimator:
                 samples.append(v)
                 accepted += 1
         
-        if len(samples) < 100:
-            samples = [np.ones(n) / n for _ in range(100)]
+        # 如果采样数不足，使用已有样本（至少需要10个）
+        if len(samples) < 10:
+            samples = [np.ones(n) / n for _ in range(10)]
         
         samples = np.array(samples)
         
@@ -379,22 +400,31 @@ class Q1FanVoteEstimator:
         
         print("\n[STEP 1] 约束优化方法求解...")
         constraint_results = {}
-        for week_key in list(self.data.keys())[:50]:
+        weeks_to_process = list(self.data.keys())[:50]
+        for i, week_key in enumerate(weeks_to_process):
             result = self.solve_constraint_optimization(week_key)
             constraint_results[week_key] = result
+            if (i + 1) % 10 == 0:
+                print(f"    进度: {i+1}/{len(weeks_to_process)}")
         print(f"  - 完成 {len(constraint_results)} 周约束优化求解")
         
         print("\n[STEP 2] 贝叶斯MCMC方法求解...")
         bayesian_results = {}
-        for week_key in list(self.data.keys())[:30]:
+        weeks_to_process = list(self.data.keys())[:30]
+        for i, week_key in enumerate(weeks_to_process):
             result = self.bayesian_mcmc_sampling(week_key)
             bayesian_results[week_key] = result
+            if (i + 1) % 10 == 0:
+                print(f"    进度: {i+1}/{len(weeks_to_process)}")
         print(f"  - 完成 {len(bayesian_results)} 周贝叶斯MCMC求解")
         
         print("\n[STEP 3] v2.0新增：Bootstrap不确定性评估...")
         bootstrap_results = {}
-        for week_key in list(self.data.keys())[:10]:
-            result = self.bootstrap_uncertainty_constraint_opt(week_key, n_bootstrap=200)
+        # 减少Bootstrap周数和迭代次数以避免卡住
+        bootstrap_weeks = list(self.data.keys())[:Config.Q1_BOOTSTRAP_WEEKS]
+        for i, week_key in enumerate(bootstrap_weeks):
+            print(f"    处理第 {i+1}/{len(bootstrap_weeks)} 周: {week_key}")
+            result = self.bootstrap_uncertainty_constraint_opt(week_key, n_bootstrap=Config.Q1_BOOTSTRAP_N)
             bootstrap_results[week_key] = result
         print(f"  - 完成 {len(bootstrap_results)} 周Bootstrap评估")
         
@@ -480,7 +510,7 @@ class Q1FanVoteEstimator:
             df.to_csv(csv_path, index=False)
             print(f"[INFO] 保存EPA详情: {csv_path}")
         
-        # 保存粉丝投票估计
+        # 保存粉丝投票估计（约束优化方法）
         summary_data = []
         for week_key, result in self.results.get('constraint_optimization', {}).items():
             week_data = self.data.get(week_key, {})
@@ -491,15 +521,95 @@ class Q1FanVoteEstimator:
                 if i < len(fan_votes):
                     summary_data.append({
                         'week_key': week_key,
+                        'season': week_data.get('season', 0),
+                        'week': week_data.get('week', 0),
                         'contestant': name,
                         'estimated_fan_vote': fan_votes[i],
-                        'fan_rank': fan_ranks[i]
+                        'fan_rank': fan_ranks[i],
+                        'method': 'constraint_optimization'
                     })
         if summary_data:
             df = pd.DataFrame(summary_data)
             csv_path = os.path.join(output_dir, "q1_fan_vote", "q1_fan_vote_estimates.csv")
             df.to_csv(csv_path, index=False)
-            print(f"[INFO] 保存粉丝投票估计: {csv_path}")
+            print(f"[INFO] 保存粉丝投票估计(约束优化): {csv_path}")
+        
+        # 保存贝叶斯MCMC结果
+        bayesian_data = []
+        for week_key, result in self.results.get('bayesian_mcmc', {}).items():
+            week_data = self.data.get(week_key, {})
+            contestants = week_data.get('contestants', [])
+            posterior_mean = result.get('posterior_mean', [])
+            posterior_std = result.get('posterior_std', [])
+            ci_lower = result.get('ci_lower', [])
+            ci_upper = result.get('ci_upper', [])
+            fan_ranks = result.get('fan_ranks', [])
+            for i, name in enumerate(contestants):
+                if i < len(posterior_mean):
+                    bayesian_data.append({
+                        'week_key': week_key,
+                        'season': week_data.get('season', 0),
+                        'week': week_data.get('week', 0),
+                        'contestant': name,
+                        'posterior_mean': posterior_mean[i],
+                        'posterior_std': posterior_std[i] if i < len(posterior_std) else 0,
+                        'ci_lower': ci_lower[i] if i < len(ci_lower) else 0,
+                        'ci_upper': ci_upper[i] if i < len(ci_upper) else 0,
+                        'fan_rank': fan_ranks[i] if i < len(fan_ranks) else 0,
+                        'method': 'bayesian_mcmc'
+                    })
+        if bayesian_data:
+            df = pd.DataFrame(bayesian_data)
+            csv_path = os.path.join(output_dir, "q1_fan_vote", "q1_bayesian_mcmc_results.csv")
+            df.to_csv(csv_path, index=False)
+            print(f"[INFO] 保存贝叶斯MCMC结果: {csv_path}")
+        
+        # 保存Bootstrap不确定性结果
+        bootstrap_data = []
+        for week_key, result in self.results.get('bootstrap_uncertainty', {}).items():
+            week_data = self.data.get(week_key, {})
+            contestants = week_data.get('contestants', [])
+            mean = result.get('mean', [])
+            std = result.get('std', [])
+            ci_lower = result.get('ci_lower', [])
+            ci_upper = result.get('ci_upper', [])
+            ci_width = result.get('ci_width', [])
+            for i, name in enumerate(contestants):
+                if i < len(mean):
+                    bootstrap_data.append({
+                        'week_key': week_key,
+                        'season': week_data.get('season', 0),
+                        'week': week_data.get('week', 0),
+                        'contestant': name,
+                        'bootstrap_mean': mean[i],
+                        'bootstrap_std': std[i] if i < len(std) else 0,
+                        'ci_lower': ci_lower[i] if i < len(ci_lower) else 0,
+                        'ci_upper': ci_upper[i] if i < len(ci_upper) else 0,
+                        'ci_width': ci_width[i] if i < len(ci_width) else 0,
+                        'n_bootstrap': result.get('n_bootstrap', 0)
+                    })
+        if bootstrap_data:
+            df = pd.DataFrame(bootstrap_data)
+            csv_path = os.path.join(output_dir, "q1_fan_vote", "q1_bootstrap_uncertainty.csv")
+            df.to_csv(csv_path, index=False)
+            print(f"[INFO] 保存Bootstrap不确定性结果: {csv_path}")
+        
+        # 打印详细结果摘要
+        print("\n" + "="*60)
+        print("问题一详细结果摘要")
+        print("="*60)
+        summary = self.results.get('summary', {})
+        print(f"约束优化求解周数: {summary.get('n_weeks_co', 0)}")
+        print(f"贝叶斯MCMC求解周数: {summary.get('n_weeks_mcmc', 0)}")
+        print(f"Bootstrap评估周数: {summary.get('n_weeks_bootstrap', 0)}")
+        print(f"约束优化EPA准确率: {summary.get('epa_constraint', 0):.2%}")
+        print(f"贝叶斯MCMC EPA准确率: {summary.get('epa_bayesian', 0):.2%}")
+        print(f"两种方法一致性率: {summary.get('consistency_rate', 0):.2%}")
+        
+        ci_comp = self.results.get('ci_comparison', {})
+        print(f"Bootstrap平均CI宽度: {ci_comp.get('bootstrap_avg_ci_width', 0):.4f}")
+        print(f"贝叶斯平均CI宽度: {ci_comp.get('bayesian_avg_ci_width', 0):.4f}")
+        print(f"推荐方法: {ci_comp.get('recommendation', 'N/A')}")
 
 
 # ============================================================================
@@ -847,6 +957,51 @@ class Q2VotingMethodComparator:
             csv_path = os.path.join(output_dir, "q2_voting_method", "q2_controversy_counterfactual.csv")
             df.to_csv(csv_path, index=False)
             print(f"[INFO] 保存争议案例反事实分析: {csv_path}")
+        
+        # 保存投票方法对比详情
+        comparison = self.results.get('method_comparison', {})
+        comparison_data = []
+        for method_name, method_data in comparison.items():
+            row = {'method': method_name}
+            row.update(method_data)
+            comparison_data.append(row)
+        if comparison_data:
+            df = pd.DataFrame(comparison_data)
+            csv_path = os.path.join(output_dir, "q2_voting_method", "q2_method_comparison.csv")
+            df.to_csv(csv_path, index=False)
+            print(f"[INFO] 保存投票方法对比: {csv_path}")
+        
+        # 保存评委二选一机制模型结果
+        tiebreaker = self.results.get('tiebreaker_model', [])
+        if tiebreaker:
+            df = pd.DataFrame(tiebreaker)
+            csv_path = os.path.join(output_dir, "q2_voting_method", "q2_tiebreaker_model.csv")
+            df.to_csv(csv_path, index=False)
+            print(f"[INFO] 保存评委二选一机制模型: {csv_path}")
+        
+        # 打印详细结果摘要
+        print("\n" + "="*60)
+        print("问题二详细结果摘要")
+        print("="*60)
+        conclusion = self.results.get('conclusion', {})
+        print(f"排名制分数-名次相关性: {conclusion.get('rank_score_corr', 0):.3f}")
+        print(f"百分比制分数-名次相关性: {conclusion.get('percent_score_corr', 0):.3f}")
+        print(f"更偏向评委的方法: {conclusion.get('more_judge_biased', 'N/A')}")
+        print(f"解释: {conclusion.get('interpretation', 'N/A')}")
+        
+        recommendation = self.results.get('recommendation', {})
+        print(f"推荐投票方法: {recommendation.get('recommended_method', 'N/A')}")
+        print(f"排名制总分: {recommendation.get('rank_total_score', 0):.3f}")
+        print(f"百分比制总分: {recommendation.get('percent_total_score', 0):.3f}")
+        print(f"是否包含评委二选一机制: {recommendation.get('include_tiebreaker', False)}")
+        
+        controversy = self.results.get('controversy_analysis', {})
+        print(f"争议案例数: {controversy.get('n_controversial', 0)}")
+        for case in controversy.get('cases', []):
+            print(f"  - {case.get('name', '')}: S{case.get('season', 0)}, "
+                  f"实际名次={case.get('placement', 0)}, "
+                  f"排名制预测={case.get('rank_predicted', 0)}, "
+                  f"结果改变={case.get('result_changed', False)}")
 
 
 # ============================================================================
@@ -1197,9 +1352,58 @@ class Q3ImpactAnalyzer:
             df.to_csv(csv_path, index=False)
             print(f"[INFO] 保存双模型对比: {csv_path}")
         
+        # 保存舞伴效应
+        partner_effect = self.results.get('partner_effect', {})
+        top_partners = partner_effect.get('top_partners', [])
+        if top_partners:
+            df = pd.DataFrame(top_partners)
+            csv_path = os.path.join(output_dir, "q3_impact_analysis", "q3_partner_effect.csv")
+            df.to_csv(csv_path, index=False)
+            print(f"[INFO] 保存舞伴效应: {csv_path}")
+        
+        # 保存年龄效应
+        age_effect = self.results.get('age_effect', {})
+        age_stats = age_effect.get('age_group_stats', [])
+        if age_stats:
+            df = pd.DataFrame(age_stats)
+            csv_path = os.path.join(output_dir, "q3_impact_analysis", "q3_age_effect.csv")
+            df.to_csv(csv_path, index=False)
+            print(f"[INFO] 保存年龄效应: {csv_path}")
+        
         if self.model_judge is not None:
             model_path = os.path.join(output_dir, "models", "q3_xgboost_model.pkl")
             save_model(self.model_judge, model_path)
+        
+        # 打印详细结果摘要
+        print("\n" + "="*60)
+        print("问题三详细结果摘要")
+        print("="*60)
+        
+        xgb = self.results.get('xgboost_analysis', {})
+        metrics = xgb.get('metrics', {})
+        print(f"XGBoost模型性能:")
+        print(f"  - RMSE: {metrics.get('rmse', 0):.4f}")
+        print(f"  - R²: {metrics.get('r2', 0):.4f}")
+        print(f"  - MAE: {metrics.get('mae', 0):.4f}")
+        print(f"  - CV RMSE: {metrics.get('cv_rmse', 0):.4f}")
+        
+        print(f"\n特征重要性 Top 10:")
+        for i, feat in enumerate(importance[:10]):
+            print(f"  {i+1}. {feat['feature']}: {feat['importance']:.4f}")
+        
+        print(f"\n年龄效应:")
+        print(f"  - 年龄-名次相关: r={age_effect.get('age_placement_corr', 0):.3f} (p={age_effect.get('age_placement_pvalue', 1):.4f})")
+        print(f"  - 年龄-评分相关: r={age_effect.get('age_score_corr', 0):.3f} (p={age_effect.get('age_score_pvalue', 1):.4f})")
+        print(f"  - 解释: {age_effect.get('interpretation', 'N/A')}")
+        
+        print(f"\n舞伴效应:")
+        print(f"  - 有效舞伴数: {partner_effect.get('n_partners', 0)}")
+        print(f"  - 舞伴间方差: {partner_effect.get('partner_variance', 0):.4f}")
+        
+        dual = self.results.get('dual_model_comparison', {})
+        print(f"\n双模型对比:")
+        print(f"  - 评委评分模型R²: {dual.get('model_judge_r2', 0):.4f}")
+        print(f"  - 粉丝投票模型R²: {dual.get('model_fan_r2', 0):.4f}")
 
 
 # ============================================================================
@@ -1556,6 +1760,63 @@ class Q4NewSystemDesigner:
             csv_path = os.path.join(output_dir, "q4_new_system", "q4_sensitivity_analysis.csv")
             sens_df.to_csv(csv_path, index=False)
             print(f"[INFO] 保存敏感性分析: {csv_path}")
+        
+        # 保存所有候选解
+        all_solutions = self.results.get('nsga2_optimization', {}).get('all_solutions', [])
+        if all_solutions:
+            df = pd.DataFrame(all_solutions)
+            csv_path = os.path.join(output_dir, "q4_new_system", "q4_all_solutions.csv")
+            df.to_csv(csv_path, index=False)
+            print(f"[INFO] 保存所有候选解: {csv_path}")
+        
+        # 保存新系统方案
+        new_systems = self.results.get('new_systems', {}).get('proposed_systems', [])
+        if new_systems:
+            systems_data = []
+            for sys in new_systems:
+                row = {
+                    'name': sys.get('name', ''),
+                    'description': sys.get('description', ''),
+                    'mechanism': sys.get('mechanism', ''),
+                    'pros': ', '.join(sys.get('pros', [])),
+                    'cons': ', '.join(sys.get('cons', []))
+                }
+                systems_data.append(row)
+            df = pd.DataFrame(systems_data)
+            csv_path = os.path.join(output_dir, "q4_new_system", "q4_proposed_systems.csv")
+            df.to_csv(csv_path, index=False)
+            print(f"[INFO] 保存新系统方案: {csv_path}")
+        
+        # 打印详细结果摘要
+        print("\n" + "="*60)
+        print("问题四详细结果摘要")
+        print("="*60)
+        
+        summary = self.results.get('summary', {})
+        print(f"NSGA-II优化结果:")
+        print(f"  - 推荐评委权重: {summary.get('recommended_w_judge', 0):.2f}")
+        print(f"  - 推荐粉丝权重: {summary.get('recommended_w_fan', 0):.2f}")
+        print(f"  - 帕累托前沿解数: {summary.get('n_pareto_solutions', 0)}")
+        print(f"  - 敏感性最优权重: {summary.get('optimal_sensitivity_weight', 0):.2f}")
+        
+        recommended = self.results.get('nsga2_optimization', {}).get('recommended_solution', {})
+        print(f"\n推荐方案详情:")
+        print(f"  - 公平性: {recommended.get('fairness', 0):.3f}")
+        print(f"  - 稳定性: {recommended.get('stability', 0):.3f}")
+        print(f"  - 娱乐性: {recommended.get('entertainment', 0):.3f}")
+        print(f"  - 总分: {recommended.get('total', 0):.3f}")
+        
+        print(f"\n系统对比:")
+        for sys in comparison:
+            print(f"  - {sys['System']}: "
+                  f"Fairness={sys['Fairness']:.3f}, "
+                  f"Stability={sys['Stability']:.3f}, "
+                  f"Entertainment={sys['Entertainment']:.3f}, "
+                  f"Total={sys['Total']:.3f}")
+        
+        print(f"\n提出的新系统方案 ({len(new_systems)}个):")
+        for i, sys in enumerate(new_systems):
+            print(f"  {i+1}. {sys.get('name', '')}: {sys.get('description', '')}")
 
 
 # ============================================================================
