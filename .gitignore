@@ -3,3 +3,6 @@ __pycache__/
 *.pyo
 .ipynb_checkpoints/
 
+# Model output directories (can regenerate by running scripts)
+solving_output_v2/
+*.pkl
