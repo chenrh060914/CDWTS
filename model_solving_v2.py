@@ -1234,10 +1234,14 @@ class Q3ImpactAnalyzer:
         # 3. 地区特征（one-hot编码，优先使用国家，如果是美国则使用州）
         # 简化处理：将地区分为几个主要类别
         def categorize_region(row):
-            country = str(row.get('celebrity_homecountry/region', '')).strip()
-            state = str(row.get('celebrity_homestate', '')).strip()
+            country_val = row.get('celebrity_homecountry/region', '')
+            state_val = row.get('celebrity_homestate', '')
             
-            if country != 'United States' and country and country != 'nan':
+            # Use pd.isna() for robust null checking
+            country = '' if pd.isna(country_val) else str(country_val).strip()
+            state = '' if pd.isna(state_val) else str(state_val).strip()
+            
+            if country != 'United States' and country:
                 return 'International'
             elif state in ['California', 'New York', 'Texas', 'Florida']:
                 return state
