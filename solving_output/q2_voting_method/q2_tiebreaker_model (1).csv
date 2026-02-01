@@ -1,3 +1,0 @@
-contestant_a,contestant_b,prob_eliminate_a,prob_eliminate_b,simulation_eliminate_a_rate,model_params
-Bristol Palin,Another Contestant,0.6130141761393355,0.3869858238606645,0.598,"{'beta_0': 0.5, 'beta_1': 0.1, 'beta_2': -0.3}"
-Bobby Bones,Another Contestant,0.6637386974043528,0.33626130259564724,0.672,"{'beta_0': 0.5, 'beta_1': 0.1, 'beta_2': -0.3}"

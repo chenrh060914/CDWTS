@@ -1,6 +1,0 @@
-name,season,placement,avg_score,voting_rule,is_controversial,controversy_type,rank_predicted,percent_predicted,tiebreaker_predicted,result_changed
-Jerry Rice,2,2,0,rank,True,低分晋级深,4,2,4,True
-Billy Ray Cyrus,4,5,0,percent,False,,7,5,5,True
-Bristol Palin,11,3,0,percent,False,,5,3,5,True
-Bristol Palin,15,9,0,percent,False,,10,9,9,True
-Bobby Bones,27,1,0,percent,True,低分晋级深,3,1,3,True
