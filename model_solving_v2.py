@@ -2,23 +2,27 @@
 # -*- coding: utf-8 -*-
 """
 模型求解模块 - MCM 2026 Problem C: Dancing with the Stars
-完整可执行Python代码 (v2.0)
+完整可执行Python代码 (v3.0)
 
-版本: v2.0
-日期: 2026-01-31
+版本: v3.0
+日期: 2026-02-01
 功能: 基于预处理数据，实现四个问题的模型求解
 
 问题一: 粉丝投票估算（约束优化 + 贝叶斯MCMC + 一致性度量 + Bootstrap置信区间）
 问题二: 投票方法比较（Kendall τ + Bootstrap + 评委二选一机制模型 + 争议案例反事实分析）
-问题三: 影响因素分析（双模型对比：评委评分预测 vs 粉丝投票预测）
+问题三: 名人特征对比赛结果影响分析（v3.0重构）
+         - 分析职业舞者（ballroom_partner）对比赛结果的影响
+         - 分析名人特征：年龄、所属行业、地区、粉丝量
+         - 排除last_week等无关因素
+         - 对比评委评分与粉丝投票的影响差异
 问题四: 新投票系统设计（NSGA-II多目标优化 + 敏感性分析 + 系统对比）
 
-更新说明（v2.0相比v1.0）:
-- 增强一致性度量指标（淘汰预测正确率 EPA）
-- 增加Bootstrap置信区间与贝叶斯MCMC对比
-- 新增评委二选一机制模型
-- 新增双预测模型（评委 vs 粉丝）
-- 新增敏感性分析
+更新说明（v3.0相比v2.0）:
+- 问题三完全重构，专注于题目要求的名人特征分析
+- 新增粉丝量（来自补充数据集）作为分析因素
+- 新增地区（国家/州）分析
+- 移除last_week等无关特征
+- 增加各类特征重要性汇总对比
 """
 
 import numpy as np
@@ -1136,328 +1140,572 @@ class Q2VotingMethodComparator:
 
 
 # ============================================================================
-# 问题三：影响因素分析模型 (v2.0增强版)
+# 问题三：影响因素分析模型 (v3.0 - 名人特征专项分析)
 # ============================================================================
 class Q3ImpactAnalyzer:
     """
     问题三：影响因素分析
     
-    方案二：XGBoost + SHAP可解释性分析
+    v3.0更新：根据题目要求，专注于分析以下因素对比赛结果的影响：
+    1. 职业舞者（ballroom_partner）的影响
+    2. 名人特征：
+       - 年龄（age）
+       - 所属行业（industry）
+       - 地区（region/country）
+       - 粉丝量（fan_count - 来自补充数据集）
     
-    v2.0新增：
-    - 双模型对比（评委评分预测 vs 粉丝投票预测）
-    - 年龄效应对比分析
-    - 特征重要性差异分析
+    排除其他无关因素（如last_week等）
+    
+    分析两个目标：
+    - 对评委评分的影响
+    - 对粉丝投票/比赛结果的影响
     """
     
     def __init__(self):
-        self.data = None
-        self.features_df = None
-        self.targets_df = None
+        self.raw_data = None  # 原始比赛数据
+        self.fan_data = None  # 粉丝量补充数据
+        self.features_df = None  # 构建的特征数据框
         self.results = {}
         self.model_judge = None
-        self.model_fan = None
-        self.model_name = "Q3_ImpactAnalyzer_v2"
+        self.model_placement = None
+        self.model_name = "Q3_ImpactAnalyzer_v3_CelebrityFeatures"
     
     def load_data(self):
-        """加载问题三数据"""
+        """加载问题三数据 - 直接从原始数据加载，构建名人特征"""
         print("\n" + "="*60)
-        print("问题三：影响因素分析模型 (v2.0)")
+        print("问题三：名人特征对比赛结果影响分析 (v3.0)")
         print("="*60)
         
-        features_path = os.path.join(Config.DATA_SUBDIR, "q3_lmem_features.csv")
-        targets_path = os.path.join(Config.DATA_SUBDIR, "q3_xgboost_targets.csv")
+        # 加载原始比赛数据
+        raw_data_path = "2026_MCM_Problem_C_Data.csv"
+        fan_data_path = "2026美赛C题补充数据集！.xlsx"
         
         try:
-            self.features_df = pd.read_csv(features_path)
-            print(f"[INFO] 特征数据: {self.features_df.shape[0]} 行, {self.features_df.shape[1]} 列")
+            self.raw_data = pd.read_csv(raw_data_path)
+            print(f"[INFO] 原始比赛数据: {self.raw_data.shape[0]} 行")
             
-            if os.path.exists(targets_path):
-                self.targets_df = pd.read_csv(targets_path)
+            # 加载粉丝量补充数据
+            if os.path.exists(fan_data_path):
+                self.fan_data = pd.read_excel(fan_data_path, sheet_name='enriched')
+                print(f"[INFO] 粉丝量补充数据: {self.fan_data.shape[0]} 行")
+            else:
+                print("[WARNING] 粉丝量补充数据不存在，将使用NaN")
+                self.fan_data = None
+                
         except Exception as e:
             print(f"[ERROR] 加载数据失败: {e}")
             return False
         
         return True
     
-    def _prepare_features(self):
-        """准备特征矩阵"""
-        feature_cols = []
-        for col in self.features_df.columns:
-            if col in ['celebrity_name', 'ballroom_partner', 'partner_name', 'placement', 'avg_score']:
-                continue
-            if self.features_df[col].dtype in ['float64', 'int64', 'bool']:
-                feature_cols.append(col)
+    def _prepare_celebrity_features(self):
+        """
+        准备名人特征矩阵 - 仅包含题目要求的特征
         
-        X = self.features_df[feature_cols].copy()
-        X = X.fillna(X.median())
+        特征：
+        1. age - 年龄
+        2. industry_* - 行业（one-hot编码）
+        3. region_* - 地区（one-hot编码，基于国家/州）
+        4. fan_count - 粉丝量（对数变换）
+        5. partner_* - 职业舞者（one-hot编码）
+        """
+        df = self.raw_data.copy()
         
-        for col in X.columns:
-            if X[col].dtype == 'bool':
-                X[col] = X[col].astype(int)
+        # 合并粉丝量数据
+        if self.fan_data is not None:
+            df = df.merge(
+                self.fan_data[['celebrity_name', 'celebrity_total_followers_wikidata']],
+                on='celebrity_name',
+                how='left'
+            )
+            df['fan_count'] = df['celebrity_total_followers_wikidata'].fillna(0)
+            # 对粉丝量做对数变换（+1避免log(0)）
+            df['fan_count_log'] = np.log1p(df['fan_count'])
+        else:
+            df['fan_count'] = 0
+            df['fan_count_log'] = 0
         
-        return X, feature_cols
+        # 1. 年龄特征
+        df['age'] = df['celebrity_age_during_season'].fillna(df['celebrity_age_during_season'].median())
+        
+        # 2. 行业特征（one-hot编码）
+        industry_dummies = pd.get_dummies(df['celebrity_industry'], prefix='industry')
+        
+        # 3. 地区特征（one-hot编码，优先使用国家，如果是美国则使用州）
+        # 简化处理：将地区分为几个主要类别
+        def categorize_region(row):
+            country_val = row.get('celebrity_homecountry/region', '')
+            state_val = row.get('celebrity_homestate', '')
+            
+            # Use pd.isna() for robust null checking
+            country = '' if pd.isna(country_val) else str(country_val).strip()
+            state = '' if pd.isna(state_val) else str(state_val).strip()
+            
+            if country != 'United States' and country:
+                return 'International'
+            elif state in ['California', 'New York', 'Texas', 'Florida']:
+                return state
+            elif state:
+                return 'Other_US'
+            else:
+                return 'Unknown'
+        
+        df['region_category'] = df.apply(categorize_region, axis=1)
+        region_dummies = pd.get_dummies(df['region_category'], prefix='region')
+        
+        # 4. 职业舞者特征（one-hot编码）
+        partner_dummies = pd.get_dummies(df['ballroom_partner'], prefix='partner')
+        
+        # 5. 计算平均评委评分作为目标变量之一
+        score_cols = [col for col in df.columns if 'judge' in col and 'score' in col]
+        
+        def calc_avg_score(row):
+            scores = []
+            for col in score_cols:
+                val = row[col]
+                if pd.notna(val) and val != 'N/A' and val != 0:
+                    try:
+                        scores.append(float(val))
+                    except (ValueError, TypeError):
+                        pass
+            return np.mean(scores) if scores else np.nan
+        
+        df['avg_score'] = df.apply(calc_avg_score, axis=1)
+        
+        # 构建最终特征数据框
+        feature_cols = ['age', 'fan_count_log']
+        
+        self.features_df = pd.concat([
+            df[['celebrity_name', 'ballroom_partner', 'placement', 'avg_score', 'season']],
+            df[feature_cols],
+            industry_dummies,
+            region_dummies,
+            partner_dummies
+        ], axis=1)
+        
+        # 移除placement为NaN的行
+        self.features_df = self.features_df.dropna(subset=['placement', 'avg_score'])
+        
+        print(f"[INFO] 特征数据准备完成: {self.features_df.shape[0]} 样本, {self.features_df.shape[1]} 列")
+        
+        # 返回特征列名（排除标识列和目标列）
+        exclude_cols = ['celebrity_name', 'ballroom_partner', 'placement', 'avg_score', 'season']
+        feature_names = [col for col in self.features_df.columns if col not in exclude_cols]
+        
+        return feature_names
     
-    def train_xgboost_model(self) -> Dict:
-        """XGBoost + 特征重要性分析"""
-        if self.features_df is None:
-            return {}
+    def _get_feature_matrix(self, feature_names):
+        """获取特征矩阵"""
+        X = self.features_df[feature_names].copy()
+        X = X.fillna(0)
+        return X
+    
+    def train_celebrity_feature_model(self, feature_names) -> Dict:
+        """
+        训练名人特征影响分析模型
         
-        target_col = 'placement' if 'placement' in self.features_df.columns else 'avg_score'
-        X, feature_cols = self._prepare_features()
-        y = self.features_df[target_col].copy()
+        分析名人特征（年龄、行业、地区、粉丝量）和职业舞者对以下目标的影响：
+        1. 评委评分 (avg_score)
+        2. 比赛结果/名次 (placement) - 代表综合结果，反映粉丝投票影响
+        """
+        print("\n[模型训练] 名人特征对比赛结果影响分析")
+        print("-" * 50)
         
-        print(f"\n[STEP 1] 准备特征矩阵: {X.shape[0]} 样本, {X.shape[1]} 特征")
-        print(f"  - 目标变量: {target_col}")
+        X = self._get_feature_matrix(feature_names)
+        y_score = self.features_df['avg_score'].copy()
+        y_placement = self.features_df['placement'].copy()
         
-        print("\n[STEP 2] 模型初始化与参数配置...")
+        print(f"  - 样本数: {len(X)}")
+        print(f"  - 特征数: {len(feature_names)}")
         
-        param_grid = {
-            'n_estimators': [50, 100],
-            'max_depth': [3, 5],
-            'min_samples_split': [5, 10]
-        }
+        # ========== 模型1：预测评委评分 ==========
+        print("\n[模型1] 预测评委评分 (avg_score)")
         
-        base_model = GradientBoostingRegressor(
+        self.model_judge = GradientBoostingRegressor(
+            n_estimators=100,
+            max_depth=5,
             learning_rate=0.1,
+            min_samples_split=5,
             random_state=Config.RANDOM_SEED
         )
+        self.model_judge.fit(X, y_score)
         
-        print("\n[STEP 3] 参数调优（网格搜索）...")
-        try:
-            grid_search = GridSearchCV(
-                base_model,
-                param_grid,
-                cv=min(Config.Q3_CV_FOLDS, 3),
-                scoring='neg_mean_squared_error',
-                n_jobs=-1
-            )
-            grid_search.fit(X, y)
-            
-            best_params = grid_search.best_params_
-            print(f"  - 最优参数: {best_params}")
-            
-            self.model_judge = grid_search.best_estimator_
-        except Exception as e:
-            print(f"[WARNING] 网格搜索失败: {e}, 使用默认参数")
-            self.model_judge = GradientBoostingRegressor(
-                n_estimators=100,
-                max_depth=5,
-                learning_rate=0.1,
-                random_state=Config.RANDOM_SEED
-            )
-            self.model_judge.fit(X, y)
-            best_params = {'n_estimators': 100, 'max_depth': 5}
+        y_score_pred = self.model_judge.predict(X)
+        score_r2 = r2_score(y_score, y_score_pred)
+        score_rmse = np.sqrt(mean_squared_error(y_score, y_score_pred))
         
-        print("\n[STEP 4] 模型训练与评估...")
-        y_pred = self.model_judge.predict(X)
-        mse = mean_squared_error(y, y_pred)
-        rmse = np.sqrt(mse)
-        r2 = r2_score(y, y_pred)
-        mae = mean_absolute_error(y, y_pred)
-        
-        print(f"  - RMSE: {rmse:.4f}")
-        print(f"  - R²: {r2:.4f}")
-        print(f"  - MAE: {mae:.4f}")
-        
-        print("\n[STEP 5] 特征重要性分析...")
-        feature_importance = pd.DataFrame({
-            'feature': feature_cols,
-            'importance': self.model_judge.feature_importances_
-        }).sort_values('importance', ascending=False)
-        
-        top_features = feature_importance.head(10)
-        print("  - Top 10 重要特征:")
-        for _, row in top_features.iterrows():
-            print(f"    * {row['feature']}: {row['importance']:.4f}")
-        
-        print("\n[STEP 6] 交叉验证...")
-        cv_scores = cross_val_score(
-            self.model_judge, X, y,
-            cv=min(Config.Q3_CV_FOLDS, 3),
+        cv_scores_judge = cross_val_score(
+            self.model_judge, X, y_score,
+            cv=min(Config.Q3_CV_FOLDS, 5),
             scoring='neg_mean_squared_error'
         )
-        cv_rmse = np.sqrt(-cv_scores.mean())
-        print(f"  - CV RMSE: {cv_rmse:.4f} (±{np.sqrt(-cv_scores).std():.4f})")
+        cv_rmse_judge = np.sqrt(-cv_scores_judge.mean())
         
-        return {
-            'best_params': best_params,
-            'metrics': {
-                'rmse': float(rmse),
-                'r2': float(r2),
-                'mae': float(mae),
-                'cv_rmse': float(cv_rmse)
-            },
-            'feature_importance': feature_importance.to_dict('records'),
-            'n_samples': len(X),
-            'n_features': len(feature_cols)
+        print(f"  - R²: {score_r2:.4f}")
+        print(f"  - RMSE: {score_rmse:.4f}")
+        print(f"  - CV RMSE: {cv_rmse_judge:.4f}")
+        
+        # ========== 模型2：预测比赛名次 ==========
+        print("\n[模型2] 预测比赛名次 (placement) - 反映粉丝投票综合影响")
+        
+        self.model_placement = GradientBoostingRegressor(
+            n_estimators=100,
+            max_depth=5,
+            learning_rate=0.1,
+            min_samples_split=5,
+            random_state=Config.RANDOM_SEED
+        )
+        self.model_placement.fit(X, y_placement)
+        
+        y_placement_pred = self.model_placement.predict(X)
+        placement_r2 = r2_score(y_placement, y_placement_pred)
+        placement_rmse = np.sqrt(mean_squared_error(y_placement, y_placement_pred))
+        
+        cv_scores_placement = cross_val_score(
+            self.model_placement, X, y_placement,
+            cv=min(Config.Q3_CV_FOLDS, 5),
+            scoring='neg_mean_squared_error'
+        )
+        cv_rmse_placement = np.sqrt(-cv_scores_placement.mean())
+        
+        print(f"  - R²: {placement_r2:.4f}")
+        print(f"  - RMSE: {placement_rmse:.4f}")
+        print(f"  - CV RMSE: {cv_rmse_placement:.4f}")
+        
+        # ========== 特征重要性对比分析 ==========
+        print("\n[特征重要性分析] 评委评分 vs 比赛结果")
+        print("-" * 50)
+        
+        importance_judge = dict(zip(feature_names, self.model_judge.feature_importances_))
+        importance_placement = dict(zip(feature_names, self.model_placement.feature_importances_))
+        
+        # 按类别聚合特征重要性
+        category_importance = {
+            'age': {'judge': 0, 'placement': 0},
+            'fan_count': {'judge': 0, 'placement': 0},
+            'industry': {'judge': 0, 'placement': 0},
+            'region': {'judge': 0, 'placement': 0},
+            'partner': {'judge': 0, 'placement': 0}
         }
-    
-    def train_dual_prediction_models(self) -> Dict:
-        """
-        v2.0新增：训练双预测模型（评委评分 + 粉丝投票）
         
-        使用相同特征集，比较系数/重要性差异
-        """
-        print("\n[v2.0] 双模型对比：评委评分 vs 粉丝投票预测")
+        for feat in feature_names:
+            imp_j = importance_judge.get(feat, 0)
+            imp_p = importance_placement.get(feat, 0)
+            
+            if feat == 'age':
+                category_importance['age']['judge'] += imp_j
+                category_importance['age']['placement'] += imp_p
+            elif 'fan_count' in feat:
+                category_importance['fan_count']['judge'] += imp_j
+                category_importance['fan_count']['placement'] += imp_p
+            elif feat.startswith('industry_'):
+                category_importance['industry']['judge'] += imp_j
+                category_importance['industry']['placement'] += imp_p
+            elif feat.startswith('region_'):
+                category_importance['region']['judge'] += imp_j
+                category_importance['region']['placement'] += imp_p
+            elif feat.startswith('partner_'):
+                category_importance['partner']['judge'] += imp_j
+                category_importance['partner']['placement'] += imp_p
         
-        if self.features_df is None:
-            return {}
+        print("\n各类别特征重要性汇总:")
+        print(f"{'类别':<15} {'对评委评分':<15} {'对比赛结果':<15} {'差异':<10}")
+        print("-" * 55)
         
-        X, feature_cols = self._prepare_features()
-        
-        # 目标1：评委评分（如果存在avg_score列）
-        if 'avg_score' in self.features_df.columns:
-            y_judge = self.features_df['avg_score'].copy()
-        else:
-            y_judge = self.features_df['placement'].copy()
-        
-        # 目标2：模拟粉丝投票（基于placement的逆序）
-        # 假设：名次越好的选手粉丝投票越高，用1/(placement+1)作为粉丝投票的代理变量
-        # 这里+1是为了避免除以零，placement=1时得到0.5，placement=10时得到约0.09
-        # 该变换使得粉丝投票与名次负相关，符合"粉丝支持越多名次越好"的假设
-        y_fan = 1.0 / (self.features_df['placement'].copy() + 1)
-        
-        # 模型A：评委评分预测
-        model_judge = GradientBoostingRegressor(
-            n_estimators=100,
-            max_depth=5,
-            learning_rate=0.1,
-            random_state=Config.RANDOM_SEED
-        )
-        model_judge.fit(X, y_judge)
-        
-        # 模型B：粉丝投票预测
-        model_fan = GradientBoostingRegressor(
-            n_estimators=100,
-            max_depth=5,
-            learning_rate=0.1,
-            random_state=Config.RANDOM_SEED
-        )
-        model_fan.fit(X, y_fan)
-        
-        # 提取特征重要性
-        importance_judge = dict(zip(feature_cols, model_judge.feature_importances_))
-        importance_fan = dict(zip(feature_cols, model_fan.feature_importances_))
-        
-        # 对比分析
-        comparison = []
-        for feature in feature_cols:
-            imp_j = importance_judge.get(feature, 0)
-            imp_f = importance_fan.get(feature, 0)
-            comparison.append({
-                'feature': feature,
-                'importance_judge': float(imp_j),
-                'importance_fan': float(imp_f),
-                'diff': float(imp_f - imp_j),
-                'ratio': float(imp_f / (imp_j + 1e-10))
+        category_results = []
+        for cat, vals in category_importance.items():
+            diff = vals['placement'] - vals['judge']
+            print(f"{cat:<15} {vals['judge']:.4f}          {vals['placement']:.4f}          {diff:+.4f}")
+            category_results.append({
+                'category': cat,
+                'importance_judge': float(vals['judge']),
+                'importance_placement': float(vals['placement']),
+                'diff': float(diff)
             })
         
-        # 按差异排序
-        comparison.sort(key=lambda x: abs(x['diff']), reverse=True)
+        # 详细特征重要性
+        feature_comparison = []
+        for feat in feature_names:
+            imp_j = importance_judge.get(feat, 0)
+            imp_p = importance_placement.get(feat, 0)
+            feature_comparison.append({
+                'feature': feat,
+                'importance_judge': float(imp_j),
+                'importance_placement': float(imp_p),
+                'diff': float(imp_p - imp_j)
+            })
         
-        print("  - 特征重要性差异 Top 5:")
-        for item in comparison[:5]:
-            print(f"    * {item['feature']}: Judge={item['importance_judge']:.3f}, Fan={item['importance_fan']:.3f}, Diff={item['diff']:.3f}")
+        feature_comparison.sort(key=lambda x: x['importance_judge'] + x['importance_placement'], reverse=True)
         
-        return {
-            'model_judge_r2': float(r2_score(y_judge, model_judge.predict(X))),
-            'model_fan_r2': float(r2_score(y_fan, model_fan.predict(X))),
-            'feature_comparison': comparison
-        }
-    
-    def analyze_partner_effect(self) -> Dict:
-        """分析舞伴效应"""
-        if self.features_df is None or 'partner_id' not in self.features_df.columns:
-            return {}
-        
-        partner_stats = self.features_df.groupby('partner_id').agg({
-            'placement': ['mean', 'std', 'count'],
-            'avg_score': ['mean', 'std']
-        }).reset_index()
-        
-        partner_stats.columns = ['partner_id', 'mean_placement', 'std_placement', 
-                                  'n_seasons', 'mean_score', 'std_score']
-        
-        partner_stats = partner_stats[partner_stats['n_seasons'] >= 3]
-        partner_stats = partner_stats.sort_values('mean_placement')
+        print("\nTop 15 最重要特征:")
+        for i, item in enumerate(feature_comparison[:15]):
+            print(f"  {i+1:2d}. {item['feature']:<30} Judge: {item['importance_judge']:.4f}, Placement: {item['importance_placement']:.4f}")
         
         return {
-            'n_partners': len(partner_stats),
-            'top_partners': partner_stats.head(10).to_dict('records'),
-            'partner_variance': float(partner_stats['mean_placement'].var()) if len(partner_stats) > 0 else 0
+            'model_judge_metrics': {
+                'r2': float(score_r2),
+                'rmse': float(score_rmse),
+                'cv_rmse': float(cv_rmse_judge)
+            },
+            'model_placement_metrics': {
+                'r2': float(placement_r2),
+                'rmse': float(placement_rmse),
+                'cv_rmse': float(cv_rmse_placement)
+            },
+            'category_importance': category_results,
+            'feature_importance': feature_comparison,
+            'n_samples': len(X),
+            'n_features': len(feature_names)
         }
     
-    def analyze_age_effect_dual(self) -> Dict:
-        """
-        v2.0新增：年龄对评委和粉丝的影响对比
-        """
-        if self.features_df is None or 'age' not in self.features_df.columns:
-            return {}
+    def analyze_age_effect(self) -> Dict:
+        """分析年龄对评委评分和比赛结果的影响"""
+        print("\n[年龄效应分析]")
+        print("-" * 50)
         
         age = self.features_df['age'].dropna()
         placement = self.features_df.loc[age.index, 'placement']
+        avg_score = self.features_df.loc[age.index, 'avg_score']
         
-        corr_placement, pvalue_placement = pearsonr(age, placement)
+        # 相关性分析
+        corr_placement, p_placement = pearsonr(age, placement)
+        corr_score, p_score = pearsonr(age, avg_score)
         
-        # 与评委评分的相关性
-        if 'avg_score' in self.features_df.columns:
-            avg_score = self.features_df.loc[age.index, 'avg_score']
-            corr_score, pvalue_score = pearsonr(age, avg_score)
-        else:
-            corr_score, pvalue_score = 0, 1
+        print(f"  - 年龄与名次相关: r={corr_placement:.4f} (p={p_placement:.4f})")
+        print(f"  - 年龄与评分相关: r={corr_score:.4f} (p={p_score:.4f})")
         
-        # 年龄分组
+        # 年龄分组统计
         age_groups = pd.cut(
             self.features_df['age'],
             bins=[0, 25, 35, 45, 55, 100],
-            labels=['<25', '25-35', '35-45', '45-55', '55+']
+            labels=['<25岁', '25-35岁', '35-45岁', '45-55岁', '55岁+']
         )
         
-        age_stats = self.features_df.groupby(age_groups).agg({
-            'placement': 'mean',
-            'avg_score': 'mean' if 'avg_score' in self.features_df.columns else 'count'
-        }).reset_index()
+        age_stats = self.features_df.groupby(age_groups, observed=True).agg({
+            'placement': ['mean', 'std', 'count'],
+            'avg_score': ['mean', 'std']
+        }).round(2)
+        
+        age_stats.columns = ['平均名次', '名次标准差', '样本数', '平均评分', '评分标准差']
+        
+        print("\n年龄分组统计:")
+        print(age_stats.to_string())
+        
+        # 解释
+        if abs(corr_placement) > abs(corr_score):
+            interpretation = "年龄对比赛结果（粉丝投票）影响更大：年轻名人更受粉丝青睐"
+        else:
+            interpretation = "年龄对评委评分影响更大：评委可能更看重经验或技术"
+        
+        print(f"\n结论: {interpretation}")
         
         return {
             'age_placement_corr': float(corr_placement),
-            'age_placement_pvalue': float(pvalue_placement),
+            'age_placement_pvalue': float(p_placement),
             'age_score_corr': float(corr_score),
-            'age_score_pvalue': float(pvalue_score),
-            'age_group_stats': age_stats.to_dict('records'),
-            'interpretation': '粉丝对年龄更敏感' if abs(corr_placement) > abs(corr_score) else '评委对年龄更敏感'
+            'age_score_pvalue': float(p_score),
+            'age_group_stats': age_stats.reset_index().to_dict('records'),
+            'interpretation': interpretation
+        }
+    
+    def analyze_industry_effect(self) -> Dict:
+        """分析行业对评委评分和比赛结果的影响"""
+        print("\n[行业效应分析]")
+        print("-" * 50)
+        
+        industry_stats = self.raw_data.groupby('celebrity_industry').agg({
+            'placement': ['mean', 'std', 'count']
+        }).round(2)
+        
+        industry_stats.columns = ['平均名次', '名次标准差', '样本数']
+        industry_stats = industry_stats[industry_stats['样本数'] >= 5]  # 至少5个样本
+        industry_stats = industry_stats.sort_values('平均名次')
+        
+        print("各行业表现统计（按平均名次排序）:")
+        print(industry_stats.head(15).to_string())
+        
+        return {
+            'industry_stats': industry_stats.reset_index().to_dict('records'),
+            'best_industries': industry_stats.head(5).index.tolist(),
+            'worst_industries': industry_stats.tail(5).index.tolist()
+        }
+    
+    def analyze_partner_effect(self) -> Dict:
+        """分析职业舞者对比赛结果的影响"""
+        print("\n[职业舞者效应分析]")
+        print("-" * 50)
+        
+        partner_stats = self.raw_data.groupby('ballroom_partner').agg({
+            'placement': ['mean', 'std', 'count']
+        }).round(2)
+        
+        partner_stats.columns = ['平均名次', '名次标准差', '合作季数']
+        partner_stats = partner_stats[partner_stats['合作季数'] >= 3]  # 至少3季
+        partner_stats = partner_stats.sort_values('平均名次')
+        
+        print("职业舞者表现统计（至少3季，按平均名次排序）:")
+        print(partner_stats.head(15).to_string())
+        
+        # 计算舞伴效应的方差，表示不同舞伴间的差异程度
+        partner_variance = float(partner_stats['平均名次'].var())
+        
+        print(f"\n舞伴间名次方差: {partner_variance:.4f}")
+        print("方差越大，说明舞伴选择对结果影响越大")
+        
+        return {
+            'partner_stats': partner_stats.reset_index().to_dict('records'),
+            'top_partners': partner_stats.head(10).index.tolist(),
+            'partner_variance': partner_variance,
+            'n_partners': len(partner_stats)
+        }
+    
+    def analyze_region_effect(self) -> Dict:
+        """分析地区对比赛结果的影响"""
+        print("\n[地区效应分析]")
+        print("-" * 50)
+        
+        # 分析国家/地区
+        country_stats = self.raw_data.groupby('celebrity_homecountry/region').agg({
+            'placement': ['mean', 'std', 'count']
+        }).round(2)
+        
+        country_stats.columns = ['平均名次', '名次标准差', '样本数']
+        country_stats = country_stats[country_stats['样本数'] >= 3]
+        country_stats = country_stats.sort_values('平均名次')
+        
+        print("国家/地区表现统计:")
+        print(country_stats.to_string())
+        
+        # 分析美国各州
+        us_data = self.raw_data[self.raw_data['celebrity_homecountry/region'] == 'United States']
+        if len(us_data) > 0:
+            state_stats = us_data.groupby('celebrity_homestate').agg({
+                'placement': ['mean', 'count']
+            }).round(2)
+            state_stats.columns = ['平均名次', '样本数']
+            state_stats = state_stats[state_stats['样本数'] >= 5]
+            state_stats = state_stats.sort_values('平均名次')
+            
+            print("\n美国各州表现统计（至少5个样本）:")
+            print(state_stats.head(10).to_string())
+        else:
+            state_stats = pd.DataFrame()
+        
+        return {
+            'country_stats': country_stats.reset_index().to_dict('records'),
+            'state_stats': state_stats.reset_index().to_dict('records') if len(state_stats) > 0 else []
+        }
+    
+    def analyze_fan_count_effect(self) -> Dict:
+        """分析粉丝量对比赛结果的影响"""
+        print("\n[粉丝量效应分析]")
+        print("-" * 50)
+        
+        if 'fan_count_log' not in self.features_df.columns:
+            print("  [WARNING] 粉丝量数据不可用")
+            return {}
+        
+        # 筛选有粉丝数据的样本
+        valid_data = self.features_df[self.features_df['fan_count_log'] > 0].copy()
+        
+        if len(valid_data) < 10:
+            print(f"  [WARNING] 有效粉丝数据样本太少: {len(valid_data)}")
+            return {'n_samples': len(valid_data)}
+        
+        fan_count = valid_data['fan_count_log']
+        placement = valid_data['placement']
+        avg_score = valid_data['avg_score']
+        
+        # 相关性分析
+        corr_placement, p_placement = pearsonr(fan_count, placement)
+        corr_score, p_score = pearsonr(fan_count, avg_score)
+        
+        print(f"  - 粉丝量与名次相关: r={corr_placement:.4f} (p={p_placement:.4f})")
+        print(f"  - 粉丝量与评分相关: r={corr_score:.4f} (p={p_score:.4f})")
+        print(f"  - 有效样本数: {len(valid_data)}")
+        
+        # 解释（注意：名次越小越好，所以负相关表示粉丝多名次好）
+        if corr_placement < 0:
+            interpretation = "粉丝量与比赛名次负相关：粉丝越多，名次越好（粉丝投票优势明显）"
+        else:
+            interpretation = "粉丝量与比赛名次正相关或无关：粉丝量不是决定性因素"
+        
+        print(f"\n结论: {interpretation}")
+        
+        return {
+            'fan_placement_corr': float(corr_placement),
+            'fan_placement_pvalue': float(p_placement),
+            'fan_score_corr': float(corr_score),
+            'fan_score_pvalue': float(p_score),
+            'n_samples': len(valid_data),
+            'interpretation': interpretation
         }
     
     def solve(self) -> Dict:
-        """求解问题三"""
+        """
+        求解问题三：名人特征对比赛结果的影响分析
+        
+        分析以下因素：
+        1. 年龄（age）
+        2. 所属行业（industry）
+        3. 地区（region/country）
+        4. 粉丝量（fan_count）
+        5. 职业舞者（ballroom_partner）
+        
+        排除其他无关因素（如last_week等）
+        """
         if not self.load_data():
             return {}
         
-        print("\n[方案二] XGBoost + 特征重要性分析")
-        xgb_results = self.train_xgboost_model()
+        # 准备名人特征
+        print("\n[STEP 1] 准备名人特征数据...")
+        feature_names = self._prepare_celebrity_features()
         
-        print("\n[v2.0新增] 双模型对比分析...")
-        dual_model_results = self.train_dual_prediction_models()
+        # 训练模型并分析特征重要性
+        print("\n[STEP 2] 训练预测模型...")
+        model_results = self.train_celebrity_feature_model(feature_names)
         
-        print("\n[补充分析] 舞伴效应...")
+        # 分析各类因素的具体影响
+        print("\n[STEP 3] 详细因素分析...")
+        age_effect = self.analyze_age_effect()
+        industry_effect = self.analyze_industry_effect()
+        region_effect = self.analyze_region_effect()
         partner_effect = self.analyze_partner_effect()
+        fan_effect = self.analyze_fan_count_effect()
         
-        print("\n[v2.0新增] 年龄效应双对比分析...")
-        age_effect = self.analyze_age_effect_dual()
-        print(f"  - 年龄-名次相关: r={age_effect.get('age_placement_corr', 0):.3f}")
-        print(f"  - 年龄-评分相关: r={age_effect.get('age_score_corr', 0):.3f}")
-        print(f"  - 结论: {age_effect.get('interpretation', '')}")
+        # 汇总结论
+        print("\n" + "="*60)
+        print("[问题三总结] 名人特征对比赛结果的影响")
+        print("="*60)
+        
+        category_importance = model_results.get('category_importance', [])
+        
+        print("\n各类特征对评委评分 vs 比赛结果（粉丝投票）的影响差异:")
+        print("-" * 60)
+        for cat in category_importance:
+            diff = cat['diff']
+            if diff > 0.01:
+                effect = "对比赛结果影响更大（粉丝更看重）"
+            elif diff < -0.01:
+                effect = "对评委评分影响更大（评委更看重）"
+            else:
+                effect = "影响相近"
+            print(f"  {cat['category']}: {effect}")
         
         self.results = {
-            'xgboost_analysis': xgb_results,
-            'dual_model_comparison': dual_model_results,
-            'partner_effect': partner_effect,
+            'model_results': model_results,
             'age_effect': age_effect,
+            'industry_effect': industry_effect,
+            'region_effect': region_effect,
+            'partner_effect': partner_effect,
+            'fan_effect': fan_effect,
             'conclusions': {
-                'top_factors': [f['feature'] for f in xgb_results.get('feature_importance', [])[:5]],
-                'model_r2': xgb_results.get('metrics', {}).get('r2', 0),
+                'category_importance': category_importance,
+                'model_judge_r2': model_results.get('model_judge_metrics', {}).get('r2', 0),
+                'model_placement_r2': model_results.get('model_placement_metrics', {}).get('r2', 0),
                 'age_placement_corr': age_effect.get('age_placement_corr', 0),
-                'age_score_corr': age_effect.get('age_score_corr', 0)
+                'age_score_corr': age_effect.get('age_score_corr', 0),
+                'top_features': [f['feature'] for f in model_results.get('feature_importance', [])[:10]]
             }
         }
         
@@ -1465,76 +1713,129 @@ class Q3ImpactAnalyzer:
     
     def save_results(self, output_dir: str):
         """保存结果"""
-        filepath = os.path.join(output_dir, "q3_impact_analysis", "q3_results_v2.json")
+        # 创建输出目录
+        q3_dir = os.path.join(output_dir, "q3_impact_analysis")
+        os.makedirs(q3_dir, exist_ok=True)
+        
+        # 保存主结果
+        filepath = os.path.join(q3_dir, "q3_results_v3.json")
         save_json(self.results, filepath)
         
-        importance = self.results.get('xgboost_analysis', {}).get('feature_importance', [])
-        if importance:
-            df = pd.DataFrame(importance)
-            csv_path = os.path.join(output_dir, "q3_impact_analysis", "q3_feature_importance.csv")
+        # 保存特征重要性
+        feature_importance = self.results.get('model_results', {}).get('feature_importance', [])
+        if feature_importance:
+            df = pd.DataFrame(feature_importance)
+            csv_path = os.path.join(q3_dir, "q3_feature_importance_v3.csv")
             df.to_csv(csv_path, index=False)
             print(f"[INFO] 保存特征重要性: {csv_path}")
         
-        # 保存双模型对比
-        dual_comparison = self.results.get('dual_model_comparison', {}).get('feature_comparison', [])
-        if dual_comparison:
-            df = pd.DataFrame(dual_comparison)
-            csv_path = os.path.join(output_dir, "q3_impact_analysis", "q3_dual_model_comparison.csv")
+        # 保存类别重要性对比
+        category_importance = self.results.get('model_results', {}).get('category_importance', [])
+        if category_importance:
+            df = pd.DataFrame(category_importance)
+            csv_path = os.path.join(q3_dir, "q3_category_importance_v3.csv")
             df.to_csv(csv_path, index=False)
-            print(f"[INFO] 保存双模型对比: {csv_path}")
+            print(f"[INFO] 保存类别重要性: {csv_path}")
         
         # 保存舞伴效应
-        partner_effect = self.results.get('partner_effect', {})
-        top_partners = partner_effect.get('top_partners', [])
-        if top_partners:
-            df = pd.DataFrame(top_partners)
-            csv_path = os.path.join(output_dir, "q3_impact_analysis", "q3_partner_effect.csv")
+        partner_stats = self.results.get('partner_effect', {}).get('partner_stats', [])
+        if partner_stats:
+            df = pd.DataFrame(partner_stats)
+            csv_path = os.path.join(q3_dir, "q3_partner_effect_v3.csv")
             df.to_csv(csv_path, index=False)
             print(f"[INFO] 保存舞伴效应: {csv_path}")
         
-        # 保存年龄效应
-        age_effect = self.results.get('age_effect', {})
-        age_stats = age_effect.get('age_group_stats', [])
-        if age_stats:
-            df = pd.DataFrame(age_stats)
-            csv_path = os.path.join(output_dir, "q3_impact_analysis", "q3_age_effect.csv")
+        # 保存行业效应
+        industry_stats = self.results.get('industry_effect', {}).get('industry_stats', [])
+        if industry_stats:
+            df = pd.DataFrame(industry_stats)
+            csv_path = os.path.join(q3_dir, "q3_industry_effect_v3.csv")
             df.to_csv(csv_path, index=False)
-            print(f"[INFO] 保存年龄效应: {csv_path}")
+            print(f"[INFO] 保存行业效应: {csv_path}")
         
+        # 保存地区效应
+        country_stats = self.results.get('region_effect', {}).get('country_stats', [])
+        if country_stats:
+            df = pd.DataFrame(country_stats)
+            csv_path = os.path.join(q3_dir, "q3_region_effect_v3.csv")
+            df.to_csv(csv_path, index=False)
+            print(f"[INFO] 保存地区效应: {csv_path}")
+        
+        # 保存模型
         if self.model_judge is not None:
-            model_path = os.path.join(output_dir, "models", "q3_xgboost_model.pkl")
+            models_dir = os.path.join(output_dir, "models")
+            os.makedirs(models_dir, exist_ok=True)
+            model_path = os.path.join(models_dir, "q3_judge_model_v3.pkl")
             save_model(self.model_judge, model_path)
         
+        if self.model_placement is not None:
+            models_dir = os.path.join(output_dir, "models")
+            os.makedirs(models_dir, exist_ok=True)
+            model_path = os.path.join(models_dir, "q3_placement_model_v3.pkl")
+            save_model(self.model_placement, model_path)
+        
         # 打印详细结果摘要
+        self._print_summary()
+    
+    def _print_summary(self):
+        """打印结果摘要"""
         print("\n" + "="*60)
-        print("问题三详细结果摘要")
+        print("问题三详细结果摘要 (v3.0 - 名人特征专项分析)")
         print("="*60)
         
-        xgb = self.results.get('xgboost_analysis', {})
-        metrics = xgb.get('metrics', {})
-        print(f"XGBoost模型性能:")
-        print(f"  - RMSE: {metrics.get('rmse', 0):.4f}")
-        print(f"  - R²: {metrics.get('r2', 0):.4f}")
-        print(f"  - MAE: {metrics.get('mae', 0):.4f}")
-        print(f"  - CV RMSE: {metrics.get('cv_rmse', 0):.4f}")
+        model_results = self.results.get('model_results', {})
         
-        print(f"\n特征重要性 Top 10:")
-        for i, feat in enumerate(importance[:10]):
-            print(f"  {i+1}. {feat['feature']}: {feat['importance']:.4f}")
+        # 模型性能
+        judge_metrics = model_results.get('model_judge_metrics', {})
+        placement_metrics = model_results.get('model_placement_metrics', {})
         
-        print(f"\n年龄效应:")
-        print(f"  - 年龄-名次相关: r={age_effect.get('age_placement_corr', 0):.3f} (p={age_effect.get('age_placement_pvalue', 1):.4f})")
-        print(f"  - 年龄-评分相关: r={age_effect.get('age_score_corr', 0):.3f} (p={age_effect.get('age_score_pvalue', 1):.4f})")
-        print(f"  - 解释: {age_effect.get('interpretation', 'N/A')}")
+        print("\n[模型性能]")
+        print(f"  评委评分预测模型:")
+        print(f"    - R²: {judge_metrics.get('r2', 0):.4f}")
+        print(f"    - RMSE: {judge_metrics.get('rmse', 0):.4f}")
+        print(f"    - CV RMSE: {judge_metrics.get('cv_rmse', 0):.4f}")
         
-        print(f"\n舞伴效应:")
-        print(f"  - 有效舞伴数: {partner_effect.get('n_partners', 0)}")
-        print(f"  - 舞伴间方差: {partner_effect.get('partner_variance', 0):.4f}")
+        print(f"  比赛名次预测模型:")
+        print(f"    - R²: {placement_metrics.get('r2', 0):.4f}")
+        print(f"    - RMSE: {placement_metrics.get('rmse', 0):.4f}")
+        print(f"    - CV RMSE: {placement_metrics.get('cv_rmse', 0):.4f}")
         
-        dual = self.results.get('dual_model_comparison', {})
-        print(f"\n双模型对比:")
-        print(f"  - 评委评分模型R²: {dual.get('model_judge_r2', 0):.4f}")
-        print(f"  - 粉丝投票模型R²: {dual.get('model_fan_r2', 0):.4f}")
+        # 类别重要性
+        print("\n[各类特征重要性汇总]")
+        category_importance = model_results.get('category_importance', [])
+        for cat in category_importance:
+            print(f"  {cat['category']}: 对评委={cat['importance_judge']:.4f}, 对结果={cat['importance_placement']:.4f}")
+        
+        # 年龄效应
+        age_effect = self.results.get('age_effect', {})
+        print(f"\n[年龄效应]")
+        print(f"  年龄与名次相关: r={age_effect.get('age_placement_corr', 0):.4f}")
+        print(f"  年龄与评分相关: r={age_effect.get('age_score_corr', 0):.4f}")
+        print(f"  结论: {age_effect.get('interpretation', 'N/A')}")
+        
+        # 粉丝量效应
+        fan_effect = self.results.get('fan_effect', {})
+        if fan_effect:
+            print(f"\n[粉丝量效应]")
+            print(f"  粉丝量与名次相关: r={fan_effect.get('fan_placement_corr', 0):.4f}")
+            print(f"  粉丝量与评分相关: r={fan_effect.get('fan_score_corr', 0):.4f}")
+            print(f"  结论: {fan_effect.get('interpretation', 'N/A')}")
+        
+        # 舞伴效应
+        partner_effect = self.results.get('partner_effect', {})
+        print(f"\n[职业舞者效应]")
+        print(f"  有效舞伴数: {partner_effect.get('n_partners', 0)}")
+        print(f"  舞伴间方差: {partner_effect.get('partner_variance', 0):.4f}")
+        top_partners = partner_effect.get('top_partners', [])[:5]
+        if top_partners:
+            print(f"  表现最佳舞伴: {', '.join(top_partners)}")
+        
+        # 行业效应
+        industry_effect = self.results.get('industry_effect', {})
+        best_industries = industry_effect.get('best_industries', [])[:5]
+        if best_industries:
+            print(f"\n[行业效应]")
+            print(f"  表现最佳行业: {', '.join(best_industries)}")
 
 
 # ============================================================================
@@ -2007,12 +2308,20 @@ def main():
     print(f"  - 推荐方法: {recommendation.get('recommended_method', '')}")
     print(f"  - 结论: {conclusion.get('interpretation', '')}")
     
-    print("\n[问题三] 影响因素分析")
+    print("\n[问题三] 名人特征对比赛结果影响分析 (v3.0)")
     q3_conclusions = q3_results.get('conclusions', {})
-    print(f"  - 模型R²: {q3_conclusions.get('model_r2', 0):.4f}")
-    print(f"  - Top 5影响因素: {q3_conclusions.get('top_factors', [])}")
-    print(f"  - 年龄-名次相关: {q3_conclusions.get('age_placement_corr', 0):.3f}")
-    print(f"  - 年龄-评分相关: {q3_conclusions.get('age_score_corr', 0):.3f}")
+    print(f"  - 评委评分模型R²: {q3_conclusions.get('model_judge_r2', 0):.4f}")
+    print(f"  - 比赛结果模型R²: {q3_conclusions.get('model_placement_r2', 0):.4f}")
+    print(f"  - Top 10影响因素: {q3_conclusions.get('top_features', [])[:10]}")
+    print(f"  - 年龄与名次相关: r={q3_conclusions.get('age_placement_corr', 0):.4f}")
+    print(f"  - 年龄与评分相关: r={q3_conclusions.get('age_score_corr', 0):.4f}")
+    
+    # 打印类别重要性
+    cat_importance = q3_conclusions.get('category_importance', [])
+    if cat_importance:
+        print("  - 各类特征重要性:")
+        for cat in cat_importance:
+            print(f"      {cat['category']}: 对评委={cat['importance_judge']:.3f}, 对结果={cat['importance_placement']:.3f}")
     
     print("\n[问题四] 新投票系统")
     q4_summary = q4_results.get('summary', {})
