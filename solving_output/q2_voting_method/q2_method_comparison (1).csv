@@ -1,0 +1,3 @@
+method,kendall_tau_mean,kendall_tau_ci,bootstrap_stability,controversy_rate
+rank_system,-0.72,"(-0.78, -0.66)",0.89,0.08
+percentage_system,-0.58,"(-0.67, -0.49)",0.75,0.15
