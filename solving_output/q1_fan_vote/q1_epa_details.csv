@@ -1,15 +1,17 @@
 week,actual_eliminated,predicted_eliminated,is_correct,voting_rule
-1_2,5,1,False,rank
+1_2,5,2,False,rank
 1_3,2,2,True,rank
-1_4,2,0,False,rank
+1_4,2,3,False,rank
 1_5,2,2,True,rank
-2_1,9,7,False,rank
+1_6,0,0,True,rank
+2_1,9,9,True,rank
 2_2,0,0,True,rank
 2_3,5,6,False,rank
 2_4,5,5,True,rank
 2_5,0,0,True,rank
 2_6,0,0,True,rank
 2_7,0,0,True,rank
+2_8,0,0,True,rank
 3_1,10,10,True,percent
 3_2,6,6,True,percent
 3_3,0,0,True,percent
@@ -18,6 +20,7 @@ week,actual_eliminated,predicted_eliminated,is_correct,voting_rule
 3_7,4,4,True,percent
 3_8,0,0,True,percent
 3_9,0,0,True,percent
+3_10,0,0,True,percent
 4_2,6,6,True,percent
 4_3,5,5,True,percent
 4_4,8,8,True,percent
@@ -26,6 +29,7 @@ week,actual_eliminated,predicted_eliminated,is_correct,voting_rule
 4_7,0,0,True,percent
 4_8,3,3,True,percent
 4_9,0,0,True,percent
+4_10,0,0,True,percent
 5_1,5,5,True,percent
 5_2,5,5,True,percent
 5_3,7,7,True,percent
@@ -35,7 +39,8 @@ week,actual_eliminated,predicted_eliminated,is_correct,voting_rule
 5_7,1,1,True,percent
 5_8,0,0,True,percent
 5_9,0,0,True,percent
-6_2,8,8,True,percent
+5_10,2,2,True,percent
+6_2,8,9,False,percent
 6_3,1,1,True,percent
 6_4,7,7,True,percent
 6_5,1,1,True,percent

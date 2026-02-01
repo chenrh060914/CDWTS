@@ -95,7 +95,7 @@
       "contestant_b": "Another Contestant",
       "prob_eliminate_a": 0.6130141761393355,
       "prob_eliminate_b": 0.3869858238606645,
-      "simulation_eliminate_a_rate": 0.612,
+      "simulation_eliminate_a_rate": 0.598,
       "model_params": {
         "beta_0": 0.5,
         "beta_1": 0.1,
@@ -107,7 +107,7 @@
       "contestant_b": "Another Contestant",
       "prob_eliminate_a": 0.6637386974043528,
       "prob_eliminate_b": 0.33626130259564724,
-      "simulation_eliminate_a_rate": 0.681,
+      "simulation_eliminate_a_rate": 0.672,
       "model_params": {
         "beta_0": 0.5,
         "beta_1": 0.1,
