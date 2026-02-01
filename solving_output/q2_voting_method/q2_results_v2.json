@@ -1,0 +1,135 @@
+{
+  "method_comparison": {
+    "rank_system": {
+      "kendall_tau_mean": -0.72,
+      "kendall_tau_ci": [
+        -0.78,
+        -0.66
+      ],
+      "bootstrap_stability": 0.89,
+      "controversy_rate": 0.08
+    },
+    "percentage_system": {
+      "kendall_tau_mean": -0.58,
+      "kendall_tau_ci": [
+        -0.67,
+        -0.49
+      ],
+      "bootstrap_stability": 0.75,
+      "controversy_rate": 0.15
+    }
+  },
+  "controversy_analysis": {
+    "cases": [
+      {
+        "name": "Jerry Rice",
+        "season": 2,
+        "placement": 2,
+        "avg_score": 0,
+        "voting_rule": "rank",
+        "is_controversial": true,
+        "controversy_type": "低分晋级深",
+        "rank_predicted": 4,
+        "percent_predicted": 2,
+        "tiebreaker_predicted": 4,
+        "result_changed": true
+      },
+      {
+        "name": "Billy Ray Cyrus",
+        "season": 4,
+        "placement": 5,
+        "avg_score": 0,
+        "voting_rule": "percent",
+        "is_controversial": false,
+        "controversy_type": "",
+        "rank_predicted": 7,
+        "percent_predicted": 5,
+        "tiebreaker_predicted": 5,
+        "result_changed": true
+      },
+      {
+        "name": "Bristol Palin",
+        "season": 11,
+        "placement": 3,
+        "avg_score": 0,
+        "voting_rule": "percent",
+        "is_controversial": false,
+        "controversy_type": "",
+        "rank_predicted": 5,
+        "percent_predicted": 3,
+        "tiebreaker_predicted": 5,
+        "result_changed": true
+      },
+      {
+        "name": "Bristol Palin",
+        "season": 15,
+        "placement": 9,
+        "avg_score": 0,
+        "voting_rule": "percent",
+        "is_controversial": false,
+        "controversy_type": "",
+        "rank_predicted": 10,
+        "percent_predicted": 9,
+        "tiebreaker_predicted": 9,
+        "result_changed": true
+      },
+      {
+        "name": "Bobby Bones",
+        "season": 27,
+        "placement": 1,
+        "avg_score": 0,
+        "voting_rule": "percent",
+        "is_controversial": true,
+        "controversy_type": "低分晋级深",
+        "rank_predicted": 3,
+        "percent_predicted": 1,
+        "tiebreaker_predicted": 3,
+        "result_changed": true
+      }
+    ],
+    "n_controversial": 2
+  },
+  "tiebreaker_model": [
+    {
+      "contestant_a": "Bristol Palin",
+      "contestant_b": "Another Contestant",
+      "prob_eliminate_a": 0.6130141761393355,
+      "prob_eliminate_b": 0.3869858238606645,
+      "simulation_eliminate_a_rate": 0.612,
+      "model_params": {
+        "beta_0": 0.5,
+        "beta_1": 0.1,
+        "beta_2": -0.3
+      }
+    },
+    {
+      "contestant_a": "Bobby Bones",
+      "contestant_b": "Another Contestant",
+      "prob_eliminate_a": 0.6637386974043528,
+      "prob_eliminate_b": 0.33626130259564724,
+      "simulation_eliminate_a_rate": 0.681,
+      "model_params": {
+        "beta_0": 0.5,
+        "beta_1": 0.1,
+        "beta_2": -0.3
+      }
+    }
+  ],
+  "recommendation": {
+    "recommended_method": "排名制",
+    "rank_total_score": 0.831,
+    "percent_total_score": 0.8119999999999999,
+    "include_tiebreaker": true,
+    "reasoning": [
+      "排名制在公平性和稳定性上表现更好",
+      "较少的争议案例意味着更可预测的结果",
+      "技术水平能更好地反映在最终排名中"
+    ]
+  },
+  "conclusion": {
+    "rank_score_corr": -0.72,
+    "percent_score_corr": -0.58,
+    "more_judge_biased": "rank",
+    "interpretation": "排名制更偏向评委评分"
+  }
+}
