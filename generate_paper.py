@@ -714,7 +714,7 @@ Problem 4: NSGA-II optimization yields a 30%:70% (judge:fan) dynamic weight syst
 
 [7] Murphy K P. Machine Learning: A Probabilistic Perspective[M]. MIT Press, 2012.
 
-[8] ABC Network. Dancing with the Stars Official Rules and Voting Guidelines[EB/OL]. (2024-09-01). https://abc.com/dwts/rules.
+[8] ABC Network. Dancing with the Stars Official Website[EB/OL]. https://www.disneyplus.com/series/dancing-with-the-stars.
 
 [9] American Statistical Association. Guidelines for Statistical Practice in the Era of Big Data[R]. Alexandria, VA: ASA, 2022.
 
@@ -762,8 +762,9 @@ Pearson correlation: r = 0.433, p < 0.0001"""
 
     p = doc.add_paragraph(appendix_text)
     
-    # Save document
-    output_path = "/home/runner/work/CDWTS/CDWTS/MCM_2026_Problem_C_Paper.docx"
+    # Save document - use current directory for portability
+    import os
+    output_path = os.path.join(os.getcwd(), "MCM_2026_Problem_C_Paper.docx")
     doc.save(output_path)
     print(f"论文已成功生成: {output_path}")
     return output_path
