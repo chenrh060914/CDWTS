@@ -1,0 +1,10 @@
+{
+  "Figure 1": "Figure 1: Age-placement box plot showing systematic disadvantage for older contestants. Pearson correlation r=0.433 (p<0.0001) confirms significant positive relationship between age and placement rank.",
+  "Figure 2": "Figure 2: Dual-model feature importance heatmap. Judges prioritize Age (39.6% vs 35.2%), while fans focus more on Professional Partner (34.1% vs 31.3%), revealing differential influence mechanisms.",
+  "Figure 3": "Figure 3: EPA comparison showing both methods exceed 80% target. Constraint Optimization achieves 86.0% EPA with tighter CI (0.082), while Bayesian MCMC reaches 95.8% CI coverage.",
+  "Figure 4": "Figure 4: Kendall \u03c4 analysis showing Rank Method superiority. \u03c4=-0.72 vs \u03c4=-0.58 (p<0.01), 14% higher stability (0.89 vs 0.75), and 7% lower controversy rate (8% vs 15%).",
+  "Figure 5": "Figure 5: NSGA-II Pareto frontier showing optimal trade-off between fairness and entertainment. Recommended 30%:70% system achieves 28.4% improvement over current systems.",
+  "Figure 6": "Figure 6: 10-fold CV shows mean test R\u00b2=0.663\u00b10.015, with 32% overfitting gap. Residuals are approximately normal (skewness=0.32, kurtosis=0.45) with no systematic pattern.",
+  "Figure 7": "Figure 7: CI width decreases from 0.12 (Week 1-3) to 0.06 (Week 8-11), showing 50% reduction. Accumulated elimination data progressively tightens fan vote estimates.",
+  "Figure 8": "Figure 8: Sensitivity analysis reveals optimal judge weight at 30-40%. Within this range, total score remains stable (\u22643% decline). Recommended 35% achieves best trade-off."
+}
